@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 5) do
 
   create_table "shipments", :force => true do |t|
     t.string   "wine",                          :default => "",        :null => false
-    t.integer  "shipper_id",                    :default => 0
+    t.integer  "shipper_id"
     t.date     "ship_date",                                            :null => false
     t.string   "status",                        :default => "Pending", :null => false
     t.datetime "created_at"
