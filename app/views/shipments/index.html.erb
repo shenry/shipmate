@@ -1,0 +1,26 @@
+<h1>Listing Shipments</h1>
+<br />
+<table border=1>
+	<tr>
+		<th>Date</th>
+		<th>From</th>
+		<th>To</th>
+		<th>Wine</th>
+		<th>Loads</th>
+		<th>Total Gallons</th>
+		<th>Status</th>
+	</tr>
+	<% @shipments.each do |shipment| -%>
+		<tr>
+			<td><%=h shipment.ship_date %></td>
+			<td><%=h shipment.from_winery.name %></td>
+			<td><%=h shipment.to_winery.name %></td>
+			<td><%=h shipment.wine %></td>
+			<td><%=h shipment.loads %></td>
+			<td><%=h shipment.loads * shipment.gals_per_load %></td>
+			<td><%=h shipment.status %></td>
+		</tr>
+	<% end -%>
+</table>
+<br />
+<%= link_to "New Shipment", new_shipment_path %>

@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :wineries
+  map.resources :shipments
+  map.resources :shippers
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

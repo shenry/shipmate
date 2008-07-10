@@ -1,0 +1,31 @@
+<% form_for @shipment do |f| %>
+	<table>
+		<tr>
+			<td>From Winery</td>
+			<td><%= f.select :from_winery, @wineries %></td>
+		</tr>
+		<tr>
+			<td>To Winery</td>
+			<td><%= f.select :from_winery, @wineries %></td>
+		</tr>
+		<tr>
+			<td>Date</td>
+			<td><%= f.date_select :ship_date %></td>
+		</tr>
+		<tr>
+			<td>Wine</td>
+			<td><%= f.text_field :wine %></td>
+		</tr>
+		<tr>
+			<td>Loads</td>
+			<td><%= f.select :loads, (1..12) %></td>
+		</tr>
+		<tr>
+			<td>Gallons per Load</td>
+			<td><%= f.text_field :gals_per_load %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit button_name %></td>
+		</tr>
+	</table>
+<% end %>

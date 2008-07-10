@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  from_winery: 1
+  to_winery: 2
+  wine: MyString
+  shipper_id: 1
+  ship_date: 2008-01-01
+
+two:
+  from_winery: 3
+  to_winery: 2
+  wine: MyString
+  shipper_id: 2
+  ship_date: 2008-01-02

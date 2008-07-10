@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: YourString
+  bond: 4444
+  address_line_1: MyString
+  address_line_2: MyString
+  state: MyString
+  zip: 12345
+
+two:
+  name: MyString
+  bond: 5555
+  address_line_1: MyString
+  address_line_2: MyString
+  state: MyString
+  zip: 12345
