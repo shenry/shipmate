@@ -4,7 +4,7 @@ class CreateShipments < ActiveRecord::Migration
       t.integer :from_winery
       t.integer :to_winery
       t.string :wine,             :null => false, :default => ""
-      t.integer :shipper_id,      :default => "Unknown"
+      t.integer :shipper_id
       t.date  :ship_date,         :null => false
       t.string :status,           :null => false, :default => "Pending"
 
