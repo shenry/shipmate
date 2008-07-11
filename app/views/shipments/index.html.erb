@@ -19,6 +19,7 @@
 			<td><%=h shipment.loads %></td>
 			<td><%=h shipment.loads * shipment.gals_per_load %></td>
 			<td><%=h shipment.status %></td>
+			<td><%= link_to "Ship More", :controller => 'shipments', :action => 'new', :id => shipment.id %></td>
 		</tr>
 	<% end -%>
 </table>

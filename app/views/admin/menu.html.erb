@@ -1,0 +1,8 @@
+<h1>User Menu</h1>
+<p>
+	You are logged in as: <%= @current_user.full_name %> (<%= link_to 'Logout', :action => 'logout' %>)
+</p>
+Options:<br />
+<ul>
+	<li><%= link_to 'Manage Users', users_path %></li>
+</ul>

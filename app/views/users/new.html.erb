@@ -1,0 +1,8 @@
+<h1>New User</h1>
+<p>
+	<%= flash[:notice] %>
+	<%= error_messages_for :user %>
+</p>
+<p>
+	<%= render :partial => 'form', :locals => {:button_name => 'Create'} %>
+</p>

@@ -1,4 +1,5 @@
 class WineriesController < ApplicationController
+  before_filter :logged_in, :get_user
 
   def index
   end

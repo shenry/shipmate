@@ -1,0 +1,31 @@
+<% form_for @user do |f| %>
+	<table>
+		<tr>
+			<td>Login</td>
+			<td><%= f.text_field :login %></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><%= password_field_tag :password %></td>
+		</tr>
+		<tr>
+			<td>Confirm Password</td>
+			<td><%= password_field_tag :confirm_password %></td>
+		</tr>
+		<tr>
+			<td>First Name</td>
+			<td><%= f.text_field :first_name %></td>
+		</tr>
+		<tr>
+			<td>Last Name</td>
+			<td><%= f.text_field :last_name %></td>
+		</tr>
+		<tr>
+			<td>Access Level</td>
+			<td><%= f.select :access, ['Global', 'Carrier', 'Winery'] %></td>
+		</tr>
+		<tr>
+			<td><%= f.submit button_name %></td>
+		</tr>
+	</table>
+<% end %>
