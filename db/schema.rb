@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "shipments", :force => true do |t|
     t.string   "wine",                          :default => "",        :null => false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.string   "access",                        :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shipper_id",                    :default => 0,  :null => false
   end
 
   create_table "users_wineries", :id => false, :force => true do |t|

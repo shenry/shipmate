@@ -20,12 +20,17 @@
 			<td>Last Name</td>
 			<td><%= f.text_field :last_name %></td>
 		</tr>
-		<tr>
-			<td>Access Level</td>
-			<td><%= f.select :access, ['Global', 'Carrier', 'Winery'] %></td>
-		</tr>
-		<tr>
-			<td><%= f.submit button_name %></td>
-		</tr>
 	</table>
+		<p>
+			<label for='user_access'>Access</label>
+			<%= f.select 	:access, ['Global', 'Carrier', 'Winery'], {:prompt => "Choose One"}, 
+							:onchange => remote_function(:url => {:action => :find_access}, 
+							:with => "'value=' + value") %>
+		</p>
+		<div id="user_options">
+			
+		</div>
+		<p>
+			<%= f.submit button_name %>
+		</p>
 <% end %>

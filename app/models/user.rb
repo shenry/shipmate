@@ -1,6 +1,7 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
   has_and_belongs_to_many :wineries
+  belongs_to :shipper
   
   validates_inclusion_of :access, :in => ['Global', 'Carrier', 'Winery']
   validates_uniqueness_of :login
@@ -11,6 +12,12 @@ class User < ActiveRecord::Base
   
   def full_name
     self.first_name.humanize + ' ' + self.last_name.humanize
+  end
+  
+  def before_save
+    if self.access != 'Carrier' && self.shipper_id > 0
+      self.shipper_id = 0
+    end
   end
   
   def before_create

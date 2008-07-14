@@ -1,0 +1,4 @@
+<p>
+	<label for="user_shipper_id">Select Carrier</label>
+	<%= select_tag :shipper_id, options_from_collection_for_select(@shippers, :id, :name) %>
+</p>

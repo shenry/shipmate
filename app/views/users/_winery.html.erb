@@ -1,0 +1,5 @@
+Choose wineries that this user can edit:
+<br />
+<% @wineries.each do |winery| %>
+	<%= check_box_tag winery.id %>&nbsp;<%= winery.name %>
+<% end %>

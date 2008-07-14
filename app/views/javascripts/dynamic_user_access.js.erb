@@ -1,0 +1,13 @@
+var shippers = new Array();
+<% for shipper in @shippers %>
+	shippers.push(new Array(<%=h shipper.name) %>, <%= shipper.id %>))
+<% end %>
+
+function accessSelected() {
+	access = $('user_access').getValue();
+	options = $('carrier_access').options;
+	options.length = 1;
+	shippers.each(function(shipper))
+		if access == 'Carrier'
+			
+}

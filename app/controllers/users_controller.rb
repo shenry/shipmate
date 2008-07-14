@@ -4,9 +4,29 @@ class UsersController < ApplicationController
   def index
     @users = User.find(:all)
   end
+  
+  def find_access
+    if params[:value] == 'Carrier'
+      @value = 'Carrier'
+      @shippers = Shipper.find(:all, :order => ["name ASC"])
+      respond_to do |format|
+        format.js
+      end
+    elsif params[:value] == 'Winery'
+      @value = 'Winery'
+      @wineries = Winery.find(:all, :order => ["name ASC"])
+      respond_to do |format|
+        format.js
+      end
+    else
+      @value = 'nil'
+    end
+  end
 
   def new
     @user = User.new
+    @shippers = Shipper.find(:all)
+    @wineries = Winery.find(:all, :order => ["name ASC"])
   end
   
   def create
