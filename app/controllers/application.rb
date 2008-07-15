@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def logged_in
     if !session[:user_id]
       flash[:notice] = "You are not logged in."
-      redirect_to :controller => 'admin', :action => 'login'
+      redirect_to :controller => 'admin', :action => 'index'
       return false
     end
   end

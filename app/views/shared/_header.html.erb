@@ -1,0 +1,3 @@
+<div id="login_info">
+	<%= session[:user_id] ? "Hello, #{@current_user.login} | #{link_to("Logout")}" : link_to("Login") %>
+</div>

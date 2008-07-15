@@ -1,0 +1,19 @@
+<div id="nav_menu">
+	<span id="page_title"><%= @page_title.nil? ? "" : "[#{@page_title}]" %></span>
+	<table>
+		<tr>
+			<td class="<%= current_page?(new_shipment_path) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "Ship Wine", new_shipment_path %></td>
+			<td class="<%= current_page?(shipments_path) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "View Schedule", shipments_path %></td>
+			<td class="<%= current_page?(user_path(@current_user)) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "Edit Profile", user_path(@current_user) %></td>
+			<td class="<%= current_page?(users_path) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "Manage Users", users_path %></td>
+			<td class="<%= current_page?(wineries_path) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "Manage Wineries", wineries_path %></td>
+			<td class="<%= current_page?(shippers_path) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "Manage Carriers", shippers_path %></td>
+		</tr>
+	</table>
+</div>

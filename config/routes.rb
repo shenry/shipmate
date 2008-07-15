@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :wineries
-  map.resources :shipments
+  map.resources :shipments, :member => {:additional => :get}
   map.resources :shippers
   map.resources :users
   
@@ -36,6 +36,6 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  #map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id.:format'
 end

@@ -1,5 +1,5 @@
-<h1>Listing Shipments</h1>
-<br />
+<% @page_title = "Shipments List"%>
+<h3>Listing Shipments to <%= Time.now.to_date - 1 %></h3>
 <table border=1>
 	<tr>
 		<th>Date</th>
@@ -19,7 +19,8 @@
 			<td><%=h shipment.loads %></td>
 			<td><%=h shipment.loads * shipment.gals_per_load %></td>
 			<td><%=h shipment.status %></td>
-			<td><%= link_to "Ship More", :controller => 'shipments', :action => 'new', :id => shipment.id %></td>
+			<td><%= link_to "Edit", edit_shipment_path(shipment) %></td>
+			<td><%= link_to "Ship More", additional_shipment_path(shipment) %></td>
 		</tr>
 	<% end -%>
 </table>
