@@ -1,0 +1,40 @@
+<div id="new_ajax_winery_form", style="display:none;">
+	<%= error_messages_for :winery %>
+	<% form_remote_for @winery, :html => {:id => 'new_winery_form'},
+											:loading => "Element.show('spinner')",
+											:complete => "Element.hide('spinner')" do |f| %>
+		<table>
+			<tr>
+				<td>Name</td>
+				<td colspan=2><%= f.text_field :name, :size => 24 %></td>
+				<td>Bond</td>
+				<td><%= f.text_field :bond, :size => 8 %></td>
+			</tr>
+
+			<tr>
+				<td>Address</td>
+				<td colspan=2><%= f.text_field :address_line_1, :size => 24 %></td>
+				<td>&nbsp;</td>
+				<td>e.g. "1234"</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td colspan=2><%= f.text_field :address_line_2, :size => 24 %></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td colspan=2><%= f.text_field :city, :size => 24 %></td>
+			</tr>
+			<tr>
+				<td>State</td>
+				<td colspan=2><%= f.state_select(:state) %></td>
+			</tr>
+			<tr>
+				<td>Zip Code</td>
+				<td><%= f.text_field :zip, :size => 8 %></td>
+				<td align='left'><%= f.submit 'New Winery' %></td>
+				<td><span id='spinner', style="display:none;"><%= image_tag 'ajax-loader.gif' %></span></td>
+			</tr>
+		</table>
+	<% end %>
+</div>

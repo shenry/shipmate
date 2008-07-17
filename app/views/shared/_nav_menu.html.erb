@@ -1,7 +1,7 @@
 <div id="nav_menu">
-	<span id="page_title"><%= @page_title.nil? ? "" : "[#{@page_title}]" %></span>
 	<table>
 		<tr>
+			<td><%= link_to "Home" %></td>
 			<td class="<%= current_page?(new_shipment_path) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Ship Wine", new_shipment_path %></td>
 			<td class="<%= current_page?(shipments_path) ? 'tab' : 'back' %>">

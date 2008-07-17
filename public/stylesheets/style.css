@@ -1,21 +1,30 @@
-body {background: #5f747d}
-a:link, a:visited {color: #444444;}
-a:hover {color: #112453;}
+body {background: #5f747d; font-size: 0.95em; color: #262626;}
+a:link, a:visited {color: #444444; text-decoration: none;}
+a:hover {color: #14161f;}
 #content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; 
 			background: #fff; border: 3px solid #bec0c0; min-height: 500px;}
+			
+table {border-collapse: collapse;}
+table th {text-align: left; border-bottom: 1px solid #262626;}
+table th, td {padding: 0 0 0 10px;}
 
-#nav_menu {background: #bec0c0; font-size: 0.9em;}
+#nav_menu {background: #bec0c0; font-size: 0.9em; margin-bottom: 25px;}
 #nav_menu td {padding: 0 9px 0 9px;}
 /*#nav_menu td a {color: black; text-decoration: none; background: #bec0c0}*/
-#nav_menu td a:link, a:visited {color: black; text-decoration: none;}
-#nav_menu a:hover {color: #1b294b;}
+#nav_menu td a:link, a:visited {text-decoration: none;}
+#nav_menu a:hover {color: #14161f;}
 #nav_menu table {border-collapse: collapse;}
 td.tab {background: #5c9fbe; color: #dfe0e2;}
 
 #header {height: 65px; /*border: 1px solid black*/; width: 100%; background: #5c9fbe; font-size: 0.85em;}
+#logo {color: #dfe0e2; font-size: 44px; padding: 5px 0 0 10px;}
 #login_info {float: right; padding: 3px 10px 0 0 ; color: #dfe0e2;}
 #login_info a:link {color: #dfe0e2;}
 #login_info a:visited {color: #dfe0e2;}
 #page_title {float: right; padding: 0 10px 0 0; font-size: 0.9em; color: #444444;}
-#yield {padding: 10px;}
+#flash {font-size: 0.95em; background: #f0fff0; border: 1px solid #696969; padding: 5px 5px 5px 10px; color: #696969;}
+#yield {padding: 0 0 0 20px;}
 
+#new_shipment_page {padding: 0 25px 0 25px; width: 830px;}
+#shipment_form {float: left;}
+#new_ajax_winery_form {float: right;}

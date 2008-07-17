@@ -1,31 +1,30 @@
-<% form_for @shipment do |f| %>
+<%= calendar_date_select_includes "silver" %>
+<div id="shipment_form">
+	<% form_for @shipment do |f| %>
+	<div id="wineries_form">
+		<%= render :partial => 'shipment_wineries_form', :locals => {:wineries => @wineries} %>
+	</div>
 	<table>
-		<tr>
-			<td>From Winery</td>
-			<td><%= f.select :from_winery_id, @wineries %></td>
-		</tr>
-		<tr>
-			<td>To Winery</td>
-			<td><%= f.select :to_winery_id, @wineries %></td>
-		</tr>
-		<tr>
-			<td>Date</td>
-			<td><%= f.date_select :ship_date %></td>
-		</tr>
-		<tr>
-			<td>Wine</td>
-			<td><%= f.text_field :wine %></td>
-		</tr>
-		<tr>
-			<td>Loads</td>
-			<td><%= f.select :loads, (1..12) %></td>
-		</tr>
-		<tr>
-			<td>Gallons per Load</td>
-			<td><%= f.text_field :gals_per_load %></td>
-		</tr>
-		<tr>
-			<td><%= f.submit button_name %></td>
-		</tr>
-	</table>
-<% end %>
+			<tr>
+				<td align='right', width='86px'>Date</td>
+				<td><%= calendar_date_select_tag('shipment[ship_date]', @shipment.ship_date, {:size => 16, :year_range => (Time.now.year..(Time.now.year + 1))}) %></td>
+			</tr>
+			<tr>
+				<td align='right'>Wine</td>
+				<td><%= f.text_field :wine, :size => 19 %></td>
+			</tr>
+			<tr>
+				<td align='right'>Loads</td>
+				<td><%= f.select :loads, (1..12) %></td>
+			</tr>
+			<tr>
+				<td align='right'>Gals / Load</td>
+				<td><%= f.text_field :gals_per_load, :size => 4 %></td>	
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align='right'><%= f.submit button_name %></td>
+			</tr>
+		</table>
+	<% end %>
+</div>

@@ -13,6 +13,11 @@
 		</div>
 		<%= render :partial => 'shared/nav_menu' %>
 		<div id="yield">
+			<div id="ajax_flash">
+				<% if flash[:notice] %>
+					<%= render :partial => 'shared/ajax_flash' %>
+				<% end %>
+			</div>
 			<%= yield %>
 		</div>
 	</div>

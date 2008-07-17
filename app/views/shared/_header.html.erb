@@ -1,3 +1,4 @@
 <div id="login_info">
-	<%= session[:user_id] ? "Hello, #{@current_user.login} | #{link_to("Logout")}" : link_to("Login") %>
+	<%= session[:user_id] ? "Hello, #{@current_user.login} | #{link_to("Logout", logout_path)}" : link_to("Login") %>
 </div>
+<div id="logo">ShipMate</div>

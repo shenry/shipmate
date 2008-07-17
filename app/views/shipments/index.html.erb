@@ -1,26 +1,31 @@
 <% @page_title = "Shipments List"%>
-<h3>Listing Shipments to <%= Time.now.to_date - 1 %></h3>
-<table border=1>
+<table>
 	<tr>
 		<th>Date</th>
 		<th>From</th>
 		<th>To</th>
 		<th>Wine</th>
 		<th>Loads</th>
-		<th>Total Gallons</th>
+		<th>Total Gals</th>
 		<th>Status</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
 	</tr>
 	<% @shipments.each do |shipment| -%>
 		<tr>
-			<td><%=h shipment.ship_date %></td>
+			<td><%=h remove_zeros_from_date(shipment.ship_date.strftime("*%m/*%d/%y")) %></td>
 			<td><%=h shipment.from_winery.name %></td>
 			<td><%=h shipment.to_winery.name %></td>
 			<td><%=h shipment.wine %></td>
 			<td><%=h shipment.loads %></td>
-			<td><%=h shipment.loads * shipment.gals_per_load %></td>
-			<td><%=h shipment.status %></td>
+			<td><%=h number_with_delimiter(shipment.loads * shipment.gals_per_load) %></td>
+			<td><%=h shipment.shipped? %></td>
 			<td><%= link_to "Edit", edit_shipment_path(shipment) %></td>
 			<td><%= link_to "Ship More", additional_shipment_path(shipment) %></td>
+			<td><%= link_to "Delete", shipment_path(shipment), 
+										:confirm => "Are you sure you want to permanently delete this shipment?",
+										:method => 'delete' %></td>
 		</tr>
 	<% end -%>
 </table>

@@ -1,10 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :wineries
-  map.resources :shipments, :member => {:additional => :get}
+  map.resources :shipments, :member => {:additional => :any}
   map.resources :shippers
   map.resources :users
   
   map.login '/login', :controller => 'admin', :action => 'index'
+  map.logout '/logout', :controller => 'admin', :action => 'logout'
+  map.connect '/user_login', :controller => 'admin', :action => 'login'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

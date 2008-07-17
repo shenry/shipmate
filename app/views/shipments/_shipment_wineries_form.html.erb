@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<td align='right'>From Winery</td>
+		<td><%= collection_select :shipment, :from_winery_id, @wineries, :id, :name, {:prompt => true} %></td>
+		<td rowspan=2, width='150px', align='right'><%= link_to_function("[create new winery]",
+																		"Element.toggle('new_ajax_winery_form')") %></td>
+	</tr>
+	<tr>
+		<td align='right'>To Winery</td>
+		<td><%= collection_select :shipment, :to_winery_id, @wineries, :id, :name, {:prompt => true} %></td>
+	</tr>
+</table>

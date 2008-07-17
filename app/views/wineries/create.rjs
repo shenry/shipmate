@@ -1,0 +1,7 @@
+page.replace_html :wineries_form, :partial => 'shipments/shipment_wineries_form', :object => @wineries
+page[:new_winery_form].reset
+page.replace_html :ajax_flash, :partial => 'shared/ajax_flash', :object => flash[:notice]
+page.toggle :new_ajax_winery_form
+flash.discard
+
+

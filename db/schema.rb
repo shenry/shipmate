@@ -9,20 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "shipments", :force => true do |t|
-    t.string   "wine",                          :default => "",        :null => false
+    t.string   "wine",                          :default => "",    :null => false
     t.integer  "shipper_id",                    :default => 0
-    t.date     "ship_date",                                            :null => false
-    t.string   "status",                        :default => "Pending", :null => false
+    t.date     "ship_date",                                        :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "loads",          :limit => 2,   :default => 1,         :null => false
-    t.integer  "gals_per_load",  :limit => 4,   :default => 6500,      :null => false
-    t.text     "comments",       :limit => 100, :default => "",        :null => false
+    t.integer  "loads",          :limit => 2,   :default => 1,     :null => false
+    t.integer  "gals_per_load",  :limit => 4,   :default => 6500,  :null => false
+    t.text     "comments",       :limit => 100, :default => "",    :null => false
     t.integer  "from_winery_id"
     t.integer  "to_winery_id"
+    t.boolean  "shipped?",                      :default => false
   end
 
   create_table "shippers", :force => true do |t|
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "wineries", :force => true do |t|
     t.string   "name",           :limit => 25, :default => "", :null => false
-    t.integer  "bond",                         :default => 0,  :null => false
     t.string   "address_line_1",               :default => "", :null => false
     t.string   "address_line_2",               :default => "", :null => false
     t.string   "city",                         :default => "", :null => false
@@ -61,6 +60,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.string   "zip",            :limit => 5,                  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "bond",                         :default => "", :null => false
   end
 
 end
