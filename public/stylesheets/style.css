@@ -4,9 +4,8 @@ a:hover {color: #14161f;}
 #content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; 
 			background: #fff; border: 3px solid #bec0c0; min-height: 500px;}
 			
-table {border-collapse: collapse;}
 table th {text-align: left; border-bottom: 1px solid #262626;}
-table th, td {padding: 0 0 0 10px;}
+table th, td {padding: 1px 0 1px 10px;}
 
 #nav_menu {background: #bec0c0; font-size: 0.9em; margin-bottom: 25px;}
 #nav_menu td {padding: 0 9px 0 9px;}
@@ -17,12 +16,13 @@ table th, td {padding: 0 0 0 10px;}
 td.tab {background: #5c9fbe; color: #dfe0e2;}
 
 #header {height: 65px; /*border: 1px solid black*/; width: 100%; background: #5c9fbe; font-size: 0.85em;}
-#logo {color: #dfe0e2; font-size: 44px; padding: 5px 0 0 10px;}
-#login_info {float: right; padding: 3px 10px 0 0 ; color: #dfe0e2;}
+#logo {color: #ffffff; font-size: 44px; padding: 5px 0 0 10px;}
+#login_info {float: right; padding: 3px 10px 0 0 ; color: #ffffff;}
 #login_info a:link {color: #dfe0e2;}
 #login_info a:visited {color: #dfe0e2;}
 #page_title {float: right; padding: 0 10px 0 0; font-size: 0.9em; color: #444444;}
-#flash {font-size: 0.95em; background: #f0fff0; border: 1px solid #696969; padding: 5px 5px 5px 10px; color: #696969;}
+#flash {font-size: 0.95em; background: #f0fff0; border: 1px solid #696969; padding: 5px 5px 5px 10px; 
+		margin: 0 20px 5px 0; color: #696969;}
 #yield {padding: 0 0 0 20px;}
 
 #new_shipment_page {padding: 0 25px 0 25px; width: 830px;}
