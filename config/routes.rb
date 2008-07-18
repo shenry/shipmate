@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :wineries
   map.resources :shipments, :member => {:additional => :any}
   map.resources :shippers
-  map.resources :users
+  map.resources :users, :member => {:home => :get}
   
   map.login '/login', :controller => 'admin', :action => 'index'
   map.logout '/logout', :controller => 'admin', :action => 'logout'

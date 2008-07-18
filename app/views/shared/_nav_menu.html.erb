@@ -1,11 +1,10 @@
 <div id="nav_menu">
 	<table>
 		<tr>
-			<td><%= link_to "Home" %></td>
+			<td class="<%= current_page?(home_user_path(@current_user)) ? 'tab' : 'back' %>">
+						<%= link_to_unless_current "Home", home_user_path(@current_user) %></td>
 			<td class="<%= current_page?(new_shipment_path) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Ship Wine", new_shipment_path %></td>
-			<td class="<%= current_page?(shipments_path) ? 'tab' : 'back' %>">
-						<%= link_to_unless_current "View Schedule", shipments_path %></td>
 			<td class="<%= current_page?(user_path(@current_user)) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Edit Profile", user_path(@current_user) %></td>
 			<td class="<%= current_page?(users_path) ? 'tab' : 'back' %>">

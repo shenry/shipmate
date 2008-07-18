@@ -5,14 +5,14 @@
 											:complete => "Element.hide('spinner')" do |f| %>
 		<table>
 			<tr>
-				<td>Name</td>
+				<td align='right'>Name</td>
 				<td colspan=2><%= f.text_field :name, :size => 24 %></td>
-				<td>Bond</td>
+				<td align='right'>Bond</td>
 				<td><%= f.text_field :bond, :size => 8 %></td>
 			</tr>
 
 			<tr>
-				<td>Address</td>
+				<td align='right'>Address</td>
 				<td colspan=2><%= f.text_field :address_line_1, :size => 24 %></td>
 				<td>&nbsp;</td>
 				<td>e.g. "1234"</td>
@@ -22,15 +22,15 @@
 				<td colspan=2><%= f.text_field :address_line_2, :size => 24 %></td>
 			</tr>
 			<tr>
-				<td>City</td>
+				<td align='right'>City</td>
 				<td colspan=2><%= f.text_field :city, :size => 24 %></td>
 			</tr>
 			<tr>
-				<td>State</td>
+				<td align='right'>State</td>
 				<td colspan=2><%= f.state_select(:state) %></td>
 			</tr>
 			<tr>
-				<td>Zip Code</td>
+				<td align='right'>Zip Code</td>
 				<td><%= f.text_field :zip, :size => 8 %></td>
 				<td align='left'><%= f.submit 'New Winery' %></td>
 				<td><span id='spinner', style="display:none;"><%= image_tag 'ajax-loader.gif' %></span></td>

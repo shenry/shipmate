@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "shipments", :force => true do |t|
     t.string   "wine",                          :default => "",    :null => false
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(:version => 10) do
     t.datetime "updated_at"
   end
 
+  create_table "shippers_users", :id => false, :force => true do |t|
+    t.integer "shipper_id", :null => false
+    t.integer "user_id",    :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login",           :limit => 18, :default => "", :null => false
     t.string   "hashed_password", :limit => 40, :default => "", :null => false
@@ -41,7 +46,7 @@ ActiveRecord::Schema.define(:version => 10) do
     t.string   "access",                        :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shipper_id",                    :default => 0,  :null => false
+    t.integer  "shipper_id"
   end
 
   create_table "users_wineries", :id => false, :force => true do |t|

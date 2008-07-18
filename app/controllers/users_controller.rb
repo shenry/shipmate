@@ -1,8 +1,31 @@
 class UsersController < ApplicationController
-  before_filter :logged_in, :get_user, :reject_unauthorized_users
+  before_filter :logged_in, :get_user
+  before_filter :reject_unauthorized_users, :except => [:home]
 
   def index
     @users = User.find(:all)
+  end
+  
+  def home
+    case when @current_user.access == 'Global'
+      @shipments = Shipment.find(:all, :order => ['ship_date ASC'], :conditions => ["ship_date > ?", Time.now.to_date - 2])
+    when @current_user.access == 'Carrier'
+      @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
+                    :conditions => ["ship_date > ? AND shipper_id = ?", Time.now.to_date - 2, @current_user.shipper_id])
+    when @current_user.access == 'Winery'
+      user_wineries = @current_user.wineries.collect {|c| c.id}
+      @shipments = []
+      winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
+                    :conditions => ["ship_date > ?", Time.now.to_date - 2]).each do |shipment|
+        if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
+          @shipments << shipment
+        end
+      end
+    else
+      flash[:notice] = "Not a recognized user access type."
+      session[:user_id] = nil
+      redirect_to root_path
+    end
   end
   
   def find_access
@@ -76,6 +99,7 @@ class UsersController < ApplicationController
   def reject_unauthorized_users
     if @current_user.access != 'Global'
       flash[:notice] = "You do not have access to this function, you've been logged out."
+      session[:user_id] = nil
       redirect_to :controller => 'admin', :action => 'index'
       return false
     end
