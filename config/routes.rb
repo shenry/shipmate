@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'admin', :action => 'index'
   map.logout '/logout', :controller => 'admin', :action => 'logout'
   map.connect '/user_login', :controller => 'admin', :action => 'login'
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -33,11 +34,11 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "admin", :action => 'menu'
+  map.root :controller => 'users', :action => 'home'
 
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  #map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'
 end

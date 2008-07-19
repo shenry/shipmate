@@ -1,0 +1,24 @@
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Login</th>
+		<th>Email</th>
+		<th>Access Type</th>
+		<th width=150px>Access To</th>
+	</tr>
+	<tr valign='top'>
+		<td><%=h @user.full_name %></td>
+		<td><%=h @user.login %></td>
+		<td><%=h @user.email %></td>
+		<td><%=h @user.access %></td>
+		<% if @user.access == 'Global' %>
+			<td>Unlimited</td>
+		<% elsif @user.access == 'Winery' %>
+			<td><%=h @user.wineries.collect {|w| w.name}.join(', ') %></td>
+		<% elsif @user.access == 'Carrier' %>
+			<td><%=h @user.shipper.name %></td>
+		<% else %>
+			<td>Unknown access type</td>
+		<% end %>
+	</tr>
+</table>

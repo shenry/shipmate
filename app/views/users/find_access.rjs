@@ -1,9 +1,15 @@
-case 
-  when @value == 'Carrier'
-    page.replace_html :user_options, :partial => 'shipper_options', :object => @shippers
-  when @value == 'Winery'
-    page.replace_html :user_options, :partial => 'winery', :object => @wineries
-  when @value == 'nil'
-    page.replace_html :user_options, ""
+#case 
+#  when @value == 'Carrier'
+#    page.replace_html :user_options, :partial => 'shipper_options', :object => @shippers
+#  when @value == 'Winery'
+#    page.replace_html :user_options, :partial => 'winery', :object => [@wineries, @user_wineries]
+#  when @value == 'nil'
+#    page.replace_html :user_options, ""
+#end
+page.hide :user_carrier_select
+page.hide :user_winery_select
+case when @value == 'Carrier'
+  page.toggle :user_carrier_select
+when @value == 'Winery'
+  page.toggle :user_winery_select
 end
-  

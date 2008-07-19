@@ -1,12 +1,15 @@
 body {background: #2b2b2c; font-size: 0.95em; color: #26262c;}
 a:link, a:visited {color: #444444; text-decoration: none;}
 a:hover {color: #14161f;}
-#content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; margin-top: 20px;
-			background: #fff; border: 3px solid #bec0c0; min-height: 500px;}
+#content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; margin-top: 20px; padding-bottom: 20px;
+			background: #fff; border: 3px solid #bec0c0; min-height: 580px;}
 
 table {border-collapse: collapse;}			
 table th {text-align: left; border-bottom: 1px solid #262626;}
-table th, td {padding: 2px 0 2px 10px;}
+table th, td {padding: 2px 2px 2px 10px;}
+
+.row1 {background: #bec0c0;}
+.row2 {background: #ffffff;}
 
 #nav_menu {background: #bec0c0; font-size: 0.9em; margin-bottom: 25px;}
 #nav_menu td {padding: 0 9px 0 9px;}
@@ -22,10 +25,14 @@ td.tab {background: #5c9fbe; color: #dfe0e2;}
 #login_info a:link {color: #dfe0e2;}
 #login_info a:visited {color: #dfe0e2;}
 #page_title {float: right; padding: 0 10px 0 0; font-size: 0.9em; color: #444444;}
-#flash {font-size: 0.95em; background: #ffff9f; border: 1px solid #262626; padding: 3px 5px 3px 10px; 
-		margin: 0 20px 5px 0; color: #262626;}
+#flash {font-size: 0.95em; background: #ffff9f; border: 1px solid #2b2b2c; padding: 3px 5px 3px 10px; 
+		margin: 0 20px 10px 0; color: #2b2b2c;}
 #yield {padding: 0 0 0 20px;}
 
 #new_shipment_page {padding: 0 25px 0 25px; width: 830px;}
 #shipment_form {float: left;}
 #new_ajax_winery_form {float: right;}
+.table_align {width: 124px;}
+#user_winery_select {padding: 5px 0 0 0;}
+
+#create_new_link {float:right;}

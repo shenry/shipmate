@@ -3,18 +3,27 @@
 	<tr>
 		<th>Login</th>
 		<th>Name</th>
+		<th>Email</th>
 		<th>Access</th>
-		<th>Wineries</th>
+		<th width=150px>Access to</th>
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 	</tr>
 	<% @users.each do |user| %>
-		<tr>
+		<tr valign='top', class="<%= cycle('row1', 'row2') %>">
 			<td><%=h user.login %></td>
 			<td><%=h user.full_name %></td>
+			<td><%= mail_to user.email %></td>
 			<td><%=h user.access %></td>
-			<td><%= user.wineries.collect {|w| w.name }.join(', ') %></td>
-			<td><%= link_to 'Edit', edit_user_path(user) %></td>
+			<% if user.access == 'Global' %>
+				<td>Unlimited</td>
+			<% elsif user.access == 'Winery' %>
+				<td><%=h user.wineries.collect {|w| w.name}.join(', ') %></td>
+			<% elsif user.access == 'Carrier' %>
+				<td><%=h user.shipper.name %></td>
+			<% else %>
+				<td>Unknown access type</td>
+			<% end %>			<td><%= link_to 'Edit', edit_user_path(user) %></td>
 			<td><%= link_to 'Delete', user_path(user), :confirm => 'Are you sure you want to permanently delete this user?',
 			 											:method => 'delete' %></td>
 		</tr>

@@ -1,2 +1,5 @@
-<h1>Wineries#new</h1>
-<p>Find me in app/views/wineries/new.html.erb</p>
+<% @page_title = "Create New Winery" %>
+<h1>New Winery</h1>
+<% form_for @winery do |f| %>
+<%= render :partial => 'shared/new_winery_form', :locals => {:f => f} %>
+<% end %>

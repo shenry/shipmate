@@ -1,0 +1,40 @@
+<% form_for @user do |f| %>
+	<table>
+		<tr>
+			<td align='right'>First Name</td>
+			<td><%= f.text_field :first_name, :size => 20 %></td>
+		</tr>
+		<tr>
+			<td align='right'>Last Name</td>
+			<td><%= f.text_field :last_name, :size => 20 %></td>
+		</tr>
+		<tr>
+			<td align='right'>Email</td>
+			<td><%= f.text_field :email, :size => 20 %></td>
+		</tr>
+		<tr>
+			<td align='right'>Login</td>
+			<td><%= f.text_field :login, :size => 20 %></td>
+		</tr>
+		<tr>
+			<td align='right'>Password</td>
+			<td><%= password_field_tag :password %></td>
+		</tr>
+		<tr>
+			<td align='right'>Confirm Password</td>
+			<td><%= password_field_tag :confirm_password %></td>
+		</tr>
+	</table>
+		<p>
+			<label for='user_access'>Access</label>
+			<%= f.select 	:access, ['Global', 'Carrier', 'Winery'], {:prompt => "Choose One"}, 
+							:onchange => remote_function(:url => {:action => :find_access}, 
+							:with => "'value=' + value") %>
+		</p>
+		<div id="user_options">
+			
+		</div>
+		<p>
+			<%= f.submit button_name %>
+		</p>
+<% end %>

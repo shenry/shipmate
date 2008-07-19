@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :logged_in, :get_user
-  before_filter :reject_unauthorized_users, :except => [:home]
+  before_filter :reject_unauthorized_users, :except => [:home, :show]
 
   def index
     @users = User.find(:all)
@@ -28,28 +28,43 @@ class UsersController < ApplicationController
     end
   end
   
+  def show
+    @user = User.find(session[:user_id])
+  end
+  
   def find_access
+    #if params[:value] == 'Carrier'
+    #  @value = 'Carrier'
+    #  @shippers = Shipper.find(:all, :order => ["name ASC"])
+    #  respond_to do |format|
+    #    format.js
+    #  end
+    #elsif params[:value] == 'Winery'
+    #  @value = 'Winery'
+    #  @user_wineries = User.find(session[:user_id]).wineries.collect {|w| w.id}
+    #  @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
+    #  respond_to do |format|
+    #    format.js
+    #  end
+    #else
+    #  @value = 'nil'
+    #end
     if params[:value] == 'Carrier'
       @value = 'Carrier'
-      @shippers = Shipper.find(:all, :order => ["name ASC"])
-      respond_to do |format|
-        format.js
-      end
     elsif params[:value] == 'Winery'
       @value = 'Winery'
-      @wineries = Winery.find(:all, :order => ["name ASC"])
-      respond_to do |format|
-        format.js
-      end
-    else
-      @value = 'nil'
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
   def new
     @user = User.new
-    @shippers = Shipper.find(:all)
-    @wineries = Winery.find(:all, :order => ["name ASC"])
+    @shippers = Shipper.find(:all, :order => ["name ASC"])
+    @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
+    @shipper_div = 'display:none;'
+    @winery_div = 'display:none;'
   end
   
   def create
@@ -72,10 +87,20 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @shippers = Shipper.find(:all, :order => ["name ASC"])
+    @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
+    if @user.access == 'Winery'
+      @shipper_div = 'display:none;'
+      @winery_div = ''
+    elsif @user.access == 'Carrier'
+      @shipper_div = ''
+      @winery_div = 'display:none;'
+    end
   end
   
   def update
     @user = User.find(params[:id])
+    @password = params[:password]
     if @user.update_attributes(params[:user])
       flash[:notice] = "User '#{@user.login}' successfully updated."
       redirect_to users_path

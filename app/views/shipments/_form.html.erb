@@ -2,27 +2,30 @@
 <div id="shipment_form">
 	<% form_for @shipment do |f| %>
 	<div id="wineries_form">
-		<%= render :partial => 'shipment_wineries_form', :locals => {:wineries => @wineries} %>
+		<div id="new_ajax_winery_form", style="display:none;">
+			<% form_remote_for @winery, :html => {:id => 'new_winery_form'},
+												:loading => "Element.show('spinner')",
+												:complete => "Element.hide('spinner')" do |f| %>
+				<%= render :partial => 'shared/shipment_wineries_form', :locals => {:wineries => @wineries, :f => f} %>
+			<% end %>
+		</div>
 	</div>
 	<table>
 			<tr>
 				<td align='right', width='86px'>Date</td>
-				<td><%= calendar_date_select_tag('shipment[ship_date]', @shipment.ship_date, {:size => 16, :year_range => (Time.now.year..(Time.now.year + 1))}) %></td>
+				<td colspan=2><%= calendar_date_select_tag('shipment[ship_date]', @shipment.ship_date, {:size => 16, :year_range => (Time.now.year..(Time.now.year + 1))}) %></td>
 			</tr>
 			<tr>
 				<td align='right'>Wine</td>
-				<td><%= f.text_field :wine, :size => 19 %></td>
+				<td colspan=2><%= f.text_field :wine, :size => 19 %></td>
 			</tr>
 			<tr>
 				<td align='right'>Loads</td>
-				<td><%= f.select :loads, (1..12) %></td>
+				<td colspan=2><%= f.select :loads, (1..12) %></td>
 			</tr>
 			<tr>
 				<td align='right'>Gals / Load</td>
 				<td><%= f.text_field :gals_per_load, :size => 4 %></td>	
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
 				<td align='right'><%= f.submit button_name %></td>
 			</tr>
 		</table>

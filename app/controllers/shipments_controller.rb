@@ -1,6 +1,6 @@
 class ShipmentsController < ApplicationController
   before_filter :logged_in, :get_user
-  before_filter :get_wineries, :new_winery, :only => [:edit, :new, :additional]
+  before_filter :get_wineries, :new_winery, :only => [:edit, :new, :create, :additional]
 
   def index
     @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", Time.now.to_date - 2])
@@ -32,7 +32,7 @@ class ShipmentsController < ApplicationController
     @shipment = Shipment.new(params[:shipment])
     if @shipment.save
       flash[:notice] = "New shipment successfully created."
-      redirect_to :action => 'index'
+      redirect_to home_user_path(@current_user)
     else
       render :action => 'new'
     end

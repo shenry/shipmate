@@ -18,6 +18,9 @@ class WineriesController < ApplicationController
         format.html {redirect_to wineries_path}
         format.js 
       end
+    else
+      flash[:notice] = "error"
+      render :action => 'new'
     end
   end
 

@@ -6,4 +6,8 @@ class Winery < ActiveRecord::Base
   validates_uniqueness_of :bond, :on => :create, :message => " already exists."
   validates_uniqueness_of :name, :on => :create, :message => " already exists."
   validates_numericality_of :bond, :on => :create, :message => " must be a number."
+  
+  def mailing_address
+    return self.address_line_1 + (self.address_line_2.blank? ? '<br />' : "#{self.address_line_2}<br />") + self.city + ', ' + self.state + ' ' + self.zip
+  end
 end

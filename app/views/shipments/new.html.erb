@@ -1,5 +1,6 @@
 <div id="new_shipment_page">
 <h1>New Shipment</h1>
-	<%= render :partial => 'new_winery_form' %>
+	<%= error_messages_for :shipment %>
+	<%= render :partial => 'shared/new_winery_form' %>
 	<%= render :partial => 'form', :locals => {:button_name => 'Create'} %>
 </div>
