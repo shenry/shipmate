@@ -1,4 +1,7 @@
 <%= error_messages_for :winery %>
+<% form_remote_for @winery, :html => {:id => 'new_winery_form'},
+									:loading => "Element.show('spinner')",
+									:complete => "Element.hide('spinner')" do |f| %>
 	<table>
 		<tr>
 			<td align='right'>Name</td>
@@ -32,3 +35,4 @@
 			<td><span id='spinner', style="display:none;"><%= image_tag 'ajax-loader.gif' %></span></td>
 		</tr>
 	</table>
+<% end %>

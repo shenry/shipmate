@@ -1,40 +1,51 @@
 <% form_for @user do |f| %>
-	<table>
-		<tr>
-			<td align='right'>First Name</td>
-			<td><%= f.text_field :first_name, :size => 20 %></td>
-		</tr>
-		<tr>
-			<td align='right'>Last Name</td>
-			<td><%= f.text_field :last_name, :size => 20 %></td>
-		</tr>
-		<tr>
-			<td align='right'>Email</td>
-			<td><%= f.text_field :email, :size => 20 %></td>
-		</tr>
-		<tr>
-			<td align='right'>Login</td>
-			<td><%= f.text_field :login, :size => 20 %></td>
-		</tr>
-		<tr>
-			<td align='right'>Password</td>
-			<td><%= password_field_tag :password %></td>
-		</tr>
-		<tr>
-			<td align='right'>Confirm Password</td>
-			<td><%= password_field_tag :confirm_password %></td>
-		</tr>
-	</table>
-	<div id="access_table">
+	<div id="main_user_table">
 		<table>
-			<td class="table_align", align='right'><label for='user_access'>Access</label></td>
-			<td><%= f.select 	:access, ['Global', 'Carrier', 'Winery'], {:prompt => "Choose One"}, 
-							:onchange => remote_function(:url => {:action => :find_access}, 
-							:with => "'value=' + value") %></td>
+			<tr>
+				<td align='right'>First Name</td>
+				<td><%= f.text_field :first_name, :size => 20 %></td>
+			</tr>
+			<tr>
+				<td align='right'>Last Name</td>
+				<td><%= f.text_field :last_name, :size => 20 %></td>
+			</tr>
+			<tr>
+				<td align='right'>Email</td>
+				<td><%= f.text_field :email, :size => 20 %></td>
+			</tr>
+			<tr>
+				<td align='right'>Login</td>
+				<td><%= f.text_field :login, :size => 20 %></td>
+			</tr>
+			<tr>
+				<td align='right'>Password</td>
+				<td><%= password_field_tag :password %></td>
+			</tr>
+			<tr>
+				<td align='right'>Confirm Password</td>
+				<td><%= password_field_tag :confirm_password %></td>
+			</tr>
 		</table>
-	</div>
-	<div id="user_options">
-		
+		<div id="access_table">
+			<table>
+				<td class="table_align", align='right'><label for='user_access'>Access</label></td>
+				<td><%= f.select 	:access, ['Global', 'Carrier', 'Winery'], {:prompt => "Choose One"}, 
+								:onchange => remote_function(:url => {:action => :find_access}, 
+								:with => "'value=' + value") %></td>
+			</table>
+		</div>
+		<div id="user_carrier_select", style="<%= @shipper_div %>">
+			<table>
+				<tr>
+					<td class="table_align", align='right'><label for="user_shipper_id">Select Carrier</label></td>
+					<td><%= collection_select :user, :shipper_id, @shippers, :id, :name, {:include_blank => true} %></td>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<p>
+			<%= f.submit button_name %>
+		</p>
 	</div>
 	<div id="user_winery_select", style="<%= @winery_div %>">
 		<table>
@@ -50,16 +61,4 @@
 			<% end %>
 		</table>
 	</div>
-	<div id="user_carrier_select", style="<%= @shipper_div %>">
-		<table>
-			<tr>
-				<td class="table_align", align='right'><label for="user_shipper_id">Select Carrier</label></td>
-				<td><%= collection_select :user, :shipper_id, @shippers, :id, :name, {:include_blank => true} %></td>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<p>
-		<%= f.submit button_name %>
-	</p>
 <% end %>

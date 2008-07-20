@@ -1,14 +1,11 @@
 <%= calendar_date_select_includes "plain" %>
+<div id="new_ajax_winery_form", style="display:none;">
+	<%= render :partial => 'shared/new_winery_form' %>
+</div>
 <div id="shipment_form">
 	<% form_for @shipment do |f| %>
 	<div id="wineries_form">
-		<div id="new_ajax_winery_form", style="display:none;">
-			<% form_remote_for @winery, :html => {:id => 'new_winery_form'},
-												:loading => "Element.show('spinner')",
-												:complete => "Element.hide('spinner')" do |f| %>
-				<%= render :partial => 'shared/shipment_wineries_form', :locals => {:wineries => @wineries, :f => f} %>
-			<% end %>
-		</div>
+		<%= render :partial => 'shared/shipment_wineries_form' %>
 	</div>
 	<table>
 			<tr>

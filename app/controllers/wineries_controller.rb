@@ -2,7 +2,7 @@ class WineriesController < ApplicationController
   before_filter :logged_in, :get_user
 
   def index
-    @wineries = Winery.find(:all, :order => ["city ASC, name ASC"])
+    @wineries = Winery.find(:all, :order => ["name ASC"])
   end
 
   def new
@@ -25,5 +25,12 @@ class WineriesController < ApplicationController
   end
 
   def edit
+  end
+  
+  def destroy
+    @winery = Winery.find(params[:id])
+    @winery.destroy
+    flash[:notice] = "Winery '#{@winery.name}' permanently destroyed."
+    redirect_to wineries_path
   end
 end
