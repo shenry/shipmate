@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
   
   def before_save
-    if self.access != 'Carrier' && self.shipper_id > 0
+    if self.access != 'Carrier'
       self.shipper_id = 0
     end
   end

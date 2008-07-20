@@ -61,8 +61,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @shippers = Shipper.find(:all, :order => ["name ASC"])
-    @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
+    prepare_user_access_attributes
     @shipper_div = 'display:none;'
     @winery_div = 'display:none;'
   end
@@ -71,12 +70,20 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @password = params[:password]
     confirm_password = params[:confirm_password]
+    wineries = params[:wineries]
     if @password == confirm_password
       @user.password = params[:password]
       if @user.save
+        if @user.access == 'Winery'
+          wineries.each do |w|
+            @user.wineries << Winery.find(w)
+          end
+        end
         flash[:notice] = "User '#{@user.login}' successfully created."
         redirect_to users_path
       else
+        prepare_access_divs
+        prepare_user_access_attributes
         render :action => 'new'
       end
     else
@@ -87,24 +94,26 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @shippers = Shipper.find(:all, :order => ["name ASC"])
-    @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
-    if @user.access == 'Winery'
-      @shipper_div = 'display:none;'
-      @winery_div = ''
-    elsif @user.access == 'Carrier'
-      @shipper_div = ''
-      @winery_div = 'display:none;'
-    end
+    prepare_user_access_attributes
+    prepare_access_divs
   end
   
   def update
     @user = User.find(params[:id])
     @password = params[:password]
     if @user.update_attributes(params[:user])
+        if @user.access == 'Winery'
+        checked_wineries = params[:wineries]
+        @user.wineries = []
+        checked_wineries.each do |w|
+          @user.wineries << Winery.find(w)
+        end
+      end
       flash[:notice] = "User '#{@user.login}' successfully updated."
       redirect_to users_path
     else
+      prepare_access_divs
+      prepare_user_access_attributes
       render :action => 'edit'
     end
   end
@@ -127,6 +136,21 @@ class UsersController < ApplicationController
       session[:user_id] = nil
       redirect_to :controller => 'admin', :action => 'index'
       return false
+    end
+  end
+  
+  def prepare_user_access_attributes
+    @shippers = Shipper.find(:all, :order => ["name ASC"])
+    @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
+  end
+  
+  def prepare_access_divs
+    if @user.access == 'Winery'
+      @shipper_div = 'display:none;'
+      @winery_div = ''
+    elsif @user.access == 'Carrier'
+      @shipper_div = ''
+      @winery_div = 'display:none;'
     end
   end
 end

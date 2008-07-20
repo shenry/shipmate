@@ -40,9 +40,15 @@ class ShipmentsController < ApplicationController
   
   def update
     @shipment = Shipment.find(params[:id])
-    if @shipment.update_attributes(params[:shipment])
-      flash[:notice] = "Shipment successfully updated."
-      redirect_to shipments_path
+    respond_to do |format|
+      if @shipment.update_attributes(params[:shipment])
+        flash[:notice] = "Shipment successfully updated."
+        format.html {redirect_to(@shipment)}
+        format.js { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.js   { head :unprocessable_entity }
+      end
     end
   end
 
