@@ -9,8 +9,8 @@ module ApplicationHelper
   def toggle_value(object)
     remote_function(:url    => url_for(object),
                     :method => :put,
-                    :before => "Element.show('spinner-#{object.id}')",
-                    :after  => "Element.hide('spinner-#{object.id}')",
+                    :loading => "Element.show('spinner-#{object.id}')",
+                    :complete  => "Element.hide('spinner-#{object.id}')",
                     :with   => "this.name + '=' + this.checked")
   end
 end
