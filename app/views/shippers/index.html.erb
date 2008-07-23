@@ -1,2 +1,17 @@
-<h1>Shippers#index</h1>
-<p>Find me in app/views/shippers/index.html.erb</p>
+<% @page_title = "Listing Carriers" -%>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+	<% @shippers.each do |shipper| -%>
+		<tr>
+			<td><%=h shipper.name %></td>
+			<td><%= link_to "Edit", edit_shipper_path(shipper) %></td>
+			<td><%= link_to "Delete", shipper_path(shipper), 
+							:confirm => "Are you sure you want to permanently delete this shipper?",
+							:method => 'delete' %></td>
+		</tr>
+	<% end -%>
+</table>

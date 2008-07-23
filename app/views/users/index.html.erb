@@ -1,5 +1,6 @@
 <% @page_title = "User Admin Menu"%>
 <table>
+	<tr><td colspan=7><div id="create_new_link"><%= link_to "New User", new_user_path %></div></td>
 	<tr>
 		<th>Login</th>
 		<th>Name</th>
@@ -29,6 +30,3 @@
 		</tr>
 	<% end %>
 </table>
-<p>
-	<%= link_to 'New User', new_user_path %>
-</p>

@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :wineries
-  map.resources :shipments, :member => {:additional => :any}
+  map.resources :shipments, :member => {:additional => :any}, :collection => {:archive => :get}
   map.resources :shippers
   map.resources :users, :member => {:home => :get}
   

@@ -1,0 +1,2 @@
+page.replace_html :ajax_flash, :partial => 'shared/ajax_flash', :object => flash[:notice]
+flash.discard

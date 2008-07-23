@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 13) do
+ActiveRecord::Schema.define(:version => 14) do
 
   create_table "shipments", :force => true do |t|
     t.string   "wine",                          :default => "",    :null => false
@@ -26,9 +26,10 @@ ActiveRecord::Schema.define(:version => 13) do
   end
 
   create_table "shippers", :force => true do |t|
-    t.string   "name",       :null => false
+    t.string   "name",                                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "brief_name", :limit => 8, :default => "", :null => false
   end
 
   create_table "shippers_users", :id => false, :force => true do |t|

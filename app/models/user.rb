@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, :within => 6..12, :on => :create, :message => " must be 6 to 12 characters long."
   
   attr_accessor :password, :confirm_password, :old_password
+  attr_accessible :first_name, :last_name, :login, :email
   attr_protected :hashed_password, :salt
   
   def full_name

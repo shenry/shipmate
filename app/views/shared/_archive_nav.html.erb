@@ -1,0 +1,11 @@
+<div id="archive_box">
+	Archive
+	<% form_tag :controller => 'shipments', :action => 'archive' do %>
+		<p>Filter by <%= select :archive, :category, ['Carriers', 'To-Winery', 'From-Winery'], {:prompt => true},
+		 						:onchange => remote_function(:url => {:controller => 'shipments', :action => 'item_list'},
+								:with => "'value=' + value") %></p>
+		<div id="item_select">
+			
+		</div>
+	<% end %>
+</div>

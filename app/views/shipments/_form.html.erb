@@ -10,11 +10,15 @@
 	<table>
 			<tr>
 				<td align='right', width='86px'>Date</td>
-				<td colspan=2><%= calendar_date_select_tag('shipment[ship_date]', @shipment.ship_date, {:size => 16, :year_range => (Time.now.year..(Time.now.year + 1))}) %></td>
+				<td colspan=2><%= calendar_date_select_tag('shipment[ship_date]', @shipment.ship_date, {:size => 17, :year_range => (Time.now.year..(Time.now.year + 1))}) %></td>
 			</tr>
 			<tr>
 				<td align='right'>Wine</td>
-				<td colspan=2><%= f.text_field :wine, :size => 19 %></td>
+				<td colspan=2><%= f.text_field :wine, :size => 20 %></td>
+			</tr>
+			<tr>
+				<td align='right'>Carrier</td>
+				<td colspan=2><%= f.collection_select :shipper_id, @shippers, :id, :name, { :include_blank => true } %></td>
 			</tr>
 			<tr>
 				<td align='right'>Loads</td>

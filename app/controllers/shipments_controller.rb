@@ -6,6 +6,14 @@ class ShipmentsController < ApplicationController
     @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", Time.now.to_date - 2])
   end
   
+  def item_list
+    case when @current_user.access == 'Global'
+      if params[:value] == 'Carrier'
+        @item_list = Shipper.find(:all, :order => ["name ASC"])
+      end
+    end
+  end
+  
   def additional
     if request.get?
       @shipment = Shipment.find(params[:id])
@@ -23,6 +31,7 @@ class ShipmentsController < ApplicationController
     #if params[:id]
     #  @shipment = Shipment.find(params[:id])
     #else
+      @shippers = Shipper.find(:all, :order => ["name ASC"])
       @shipment = Shipment.new
       @shipment_url = {:controller => 'shipments', :action => 'create'}
     #end
@@ -44,7 +53,7 @@ class ShipmentsController < ApplicationController
       if @shipment.update_attributes(params[:shipment])
         flash[:notice] = "Shipment successfully updated."
         format.html {redirect_to(@shipment)}
-        format.js { head :ok }
+        format.js
       else
         format.html { render :action => "edit" }
         format.js   { head :unprocessable_entity }

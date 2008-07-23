@@ -3,10 +3,11 @@
 		<th>Date</th>
 		<th>From</th>
 		<th>To</th>
+		<th>Carrier</th>
 		<th>Wine</th>
 		<th>Loads</th>
 		<th>Total Gals</th>
-		<th width=115px>&nbsp;</th>
+		<th width=94px>&nbsp;</th>
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
@@ -16,18 +17,18 @@
 			<td><%=h remove_zeros_from_date(shipment.ship_date.strftime("*%m/*%d/%y")) %></td>
 			<td><%=h shipment.from_winery.name %></td>
 			<td><%=h shipment.to_winery.name %></td>
+			<td><%=h shipment.shipper.brief_name %></td>
 			<td><%=h shipment.wine %></td>
 			<td><%=h shipment.loads %></td>
 			<td><%=h number_with_delimiter(shipment.loads * shipment.gals_per_load) %></td>
-			<td><strong>Shipped?</strong><%= check_box_tag 'shipment[is_shipped]', "1", shipment.is_shipped,
+			<td class='no_pad'>Shipped?<%= check_box_tag 'shipment[is_shipped]', "1", shipment.is_shipped,
 			 								:onclick => toggle_value(shipment) %>
 										<%= image_tag "ajax-loader.gif", :id => "spinner-#{shipment.id}",
-											:style => "display:none;"%></td>
-			<td><%= link_to "Edit", edit_shipment_path(shipment) %></td>
+												:style => "display:none;" %></td>
+			
 			<td><%= link_to "Ship More", additional_shipment_path(shipment) %></td>
-			<td><%= link_to "Delete", shipment_path(shipment), 
-										:confirm => "Are you sure you want to permanently delete this shipment?",
-										:method => 'delete' %></td>
+			<td><%= link_to "Show", shipment_path(shipment) %></td>
+			<td><%= link_to "Edit", edit_shipment_path(shipment) %></td>			
 		</tr>
 	<% end -%>
 </table>

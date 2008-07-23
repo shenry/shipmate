@@ -1,2 +1,3 @@
+<%= render :partial => 'shared/archive_nav' %>
 <p>Listing shipments for <%= @current_user.login %> from <%= remove_zeros_from_date(Time.now.strftime("*%m/*%d/%y")) %></p>
 <%= render :partial => 'shipments/list', :locals => {:shipments => @shipments} %>
