@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'shipments/item_list', :controller => 'shipments', :action => 'item_list'
   map.connect 'shipments/test_complete', :controller => 'shipments', :action => 'test_complete'
   #map.connect 'shipments/additional/:id', :controller => 'shipments', :action => 'additional'
+  map.connect 'users/find_access', :controller => 'users', :action => 'find_access'
   
   map.login '/login', :controller => 'admin', :action => 'index'
   map.logout '/logout', :controller => 'admin', :action => 'logout'

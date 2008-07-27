@@ -1,4 +1,7 @@
 <div id="nav_menu">
+	<span id="nav_spinner", style="display:none;">
+		<%= image_tag "ajax-loader-nav.gif", :class => "archive_spinner" %>
+	</span>
 	<span id="archive">
 		<% if current_page?(home_shipments_path(@current_user)) || (controller.controller_name == 'shipments' && controller.action_name == 'archive') %>
 			<%= render :partial => 'shared/archive_nav' %>
