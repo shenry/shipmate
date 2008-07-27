@@ -57,3 +57,6 @@ Rails::Initializer.run do |config|
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
 end
+
+STD_CUTOFF_DATE = Time.now.to_date - 2
+ARCHIVE_CATEGORIES = [["Carrier", "shipper_id"], ["From Winery", "from_winery_id"], ["To Winery", "to_winery_id"]]

@@ -3,7 +3,7 @@
 	<%= render :partial => 'shared/new_winery_form' %>
 </div>
 <div id="shipment_form">
-	<% form_for @shipment do |f| %>
+	<% form_tag @shipment_url do %>
 	<div id="wineries_form">
 		<%= render :partial => 'shared/shipment_wineries_form' %>
 	</div>
@@ -14,20 +14,20 @@
 			</tr>
 			<tr>
 				<td align='right'>Wine</td>
-				<td colspan=2><%= f.text_field :wine, :size => 20 %></td>
+				<td colspan=2><%= text_field_tag('shipment[wine]', @shipment.wine, :size => 20) %></td>
 			</tr>
 			<tr>
 				<td align='right'>Carrier</td>
-				<td colspan=2><%= f.collection_select :shipper_id, @shippers, :id, :name, { :include_blank => true } %></td>
+				<td colspan=2><%= collection_select :shipment, :shipper_id, @shippers, :id, :name, { :include_blank => true } %></td>
 			</tr>
 			<tr>
 				<td align='right'>Loads</td>
-				<td colspan=2><%= f.select :loads, (1..12) %></td>
+				<td colspan=2><%= select :shipment, :loads, (1..12) %></td>
 			</tr>
 			<tr>
 				<td align='right'>Gals / Load</td>
-				<td><%= f.text_field :gals_per_load, :size => 4 %></td>	
-				<td align='right'><%= f.submit button_name %></td>
+				<td><%= text_field_tag('shipment[gals_per_load]', @shipment.gals_per_load, :size => 4) %></td>	
+				<td align='right'><%= submit_tag button_name %></td>
 			</tr>
 		</table>
 	<% end %>

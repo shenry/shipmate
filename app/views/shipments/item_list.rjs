@@ -1,1 +1,1 @@
-page.replace_html :item_select, "Hello World!"
+page.replace_html :archive_replace, :partial => 'shared/archive_criteria', :object => @item_list

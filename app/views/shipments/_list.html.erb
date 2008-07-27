@@ -25,7 +25,7 @@
 			 								:onclick => toggle_value(shipment) %>
 										<%= image_tag "ajax-loader.gif", :id => "spinner-#{shipment.id}",
 												:style => "display:none;" %></td>
-			
+		
 			<td><%= link_to "Ship More", additional_shipment_path(shipment) %></td>
 			<td><%= link_to "Show", shipment_path(shipment) %></td>
 			<td><%= link_to "Edit", edit_shipment_path(shipment) %></td>			

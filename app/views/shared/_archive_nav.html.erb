@@ -1,11 +1,14 @@
-<div id="archive_box">
-	Archive
-	<% form_tag :controller => 'shipments', :action => 'archive' do %>
-		<p>Filter by <%= select :archive, :category, ['Carriers', 'To-Winery', 'From-Winery'], {:prompt => true},
-		 						:onchange => remote_function(:url => {:controller => 'shipments', :action => 'item_list'},
-								:with => "'value=' + value") %></p>
-		<div id="item_select">
-			
-		</div>
-	<% end %>
-</div>
+<% form_remote_tag :url => {:controller => 'shipments', :action => 'archive'} do %>
+	Filter by 
+		<span id="archive_select">
+			<%= select :archive, :category, ARCHIVE_CATEGORIES, {:prompt => true},
+	 			:onchange => remote_function(:url => {:controller => 'shipments', :action => 'item_list'}, 
+				:with => "'value=' + value") %>
+			<span id="archive_replace">
+				<%= select :archive, :item, @item_list, {:prompt => true}, {:disabled => @item_list.empty? ? 'true' : 'false'} %>
+			</span>
+			<span id='archive_submit'>
+				<%= render :partial => 'shared/archive_submit' %>
+			</span>
+		</span>		
+<% end %>

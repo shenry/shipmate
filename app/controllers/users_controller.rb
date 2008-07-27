@@ -6,28 +6,6 @@ class UsersController < ApplicationController
     @users = User.find(:all)
   end
   
-  def home
-    case when @current_user.access == 'Global'
-      @shipments = Shipment.find(:all, :order => ['ship_date ASC'], :conditions => ["ship_date > ?", Time.now.to_date - 2])
-    when @current_user.access == 'Carrier'
-      @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
-                    :conditions => ["ship_date > ? AND shipper_id = ?", Time.now.to_date - 2, @current_user.shipper_id])
-    when @current_user.access == 'Winery'
-      user_wineries = @current_user.wineries.collect {|c| c.id}
-      @shipments = []
-      winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
-                    :conditions => ["ship_date > ?", Time.now.to_date - 2]).each do |shipment|
-        if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
-          @shipments << shipment
-        end
-      end
-    else
-      flash[:notice] = "Not a recognized user access type."
-      session[:user_id] = nil
-      redirect_to root_path
-    end
-  end
-  
   def show
     @user = User.find(session[:user_id])
   end

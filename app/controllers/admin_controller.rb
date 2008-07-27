@@ -14,7 +14,7 @@ class AdminController < ApplicationController
       if found_user
         session[:user_id] = found_user.id
         flash[:notice] = "Login successful."
-        redirect_to home_user_path(User.find(session[:user_id]))
+        redirect_to home_shipments_path(User.find(session[:user_id]))
       else
         flash[:notice] = "Username/password combination incorrect. Please check your caps lock and try again."
         render :action => 'index'

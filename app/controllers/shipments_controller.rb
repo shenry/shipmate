@@ -3,26 +3,59 @@ class ShipmentsController < ApplicationController
   before_filter :get_wineries, :new_winery, :only => [:edit, :new, :create, :additional]
 
   def index
-    @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", Time.now.to_date - 2])
+    @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", STD_CUTOFF_DATE])
+  end
+  
+  def home
+    @shipments = @current_user.accessible_shipments.find_all { |s| s.ship_date > STD_CUTOFF_DATE }
+    @item_list = []
+  end
+  
+  def archive
+    category = params[:archive][:category]
+    item = params[:archive][:item]
+    selected_shipments = Shipment.find(:all, :order => ["ship_date ASC"], :conditions => ["#{category} = ?", item])
+    @shipments = []
+    @current_user.accessible_shipments.each do |shipment|
+      if selected_shipments.include?(shipment)
+        @shipments << shipment
+      end
+    end
+    respond_to do |format|
+      format.html {render :action => 'home'}
+      format.js
+    end
+  end
+  
+  def test_complete
+    if params[:value] == ""
+      @value = nil
+    else
+      @value = 'test'
+    end
   end
   
   def item_list
-    case when @current_user.access == 'Global'
-      if params[:value] == 'Carrier'
-        @item_list = Shipper.find(:all, :order => ["name ASC"])
-      end
+    @value = params[:value]
+    @item_list = []
+    case when @value == 'shipper_id'
+      @item_list = Shipper.find(:all, :order => ["name ASC"])
+    when @value == 'from_winery_id' || @value == 'to_winery_id'
+      @item_list = Winery.find(:all, :order => ["name ASC"])
     end
   end
   
   def additional
     if request.get?
       @shipment = Shipment.find(params[:id])
+      @shippers = Shipper.find(:all, :order => ["name ASC"])
+      @shipment_url = {:controller => 'shipments', :action => 'create'}
       render :action => 'new'
     elsif request.post?
       @shipment = Shipment.new(params[:shipment])
       if @shipment.save
         flash[:notice] = "Additional shipments successfully created."
-        redirect_to :action => 'index'
+        redirect_to home_shipments_path(@current_user)
       end
     end
   end
@@ -41,7 +74,7 @@ class ShipmentsController < ApplicationController
     @shipment = Shipment.new(params[:shipment])
     if @shipment.save
       flash[:notice] = "New shipment successfully created."
-      redirect_to home_user_path(@current_user)
+      redirect_to home_shipments_path(@current_user)
     else
       render :action => 'new'
     end
@@ -52,7 +85,7 @@ class ShipmentsController < ApplicationController
     respond_to do |format|
       if @shipment.update_attributes(params[:shipment])
         flash[:notice] = "Shipment successfully updated."
-        format.html {redirect_to(@shipment)}
+        format.html {redirect_to(home_shipments_path(@current_user))}
         format.js
       else
         format.html { render :action => "edit" }

@@ -1,0 +1,6 @@
+<% if @value.blank? %>
+	<%= submit_tag "Go", { :disabled => true } %>
+<% else %>
+	<%= submit_tag 'Go' %>
+<% end %>
+	

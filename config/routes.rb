@@ -2,7 +2,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :wineries
   map.resources :shipments, :member => {:additional => :any}, :collection => {:archive => :get}
   map.resources :shippers
-  map.resources :users, :member => {:home => :get}
+  map.resources :users
+  
+  map.home_shipments 'shipments/home/:id', :controller => 'shipments', :action => 'home'
+  map.archive_shipments 'shipments/archive/', :controller => 'shipments', :action => 'archive'
+  map.connect 'shipments/item_list', :controller => 'shipments', :action => 'item_list'
+  map.connect 'shipments/test_complete', :controller => 'shipments', :action => 'test_complete'
+  #map.connect 'shipments/additional/:id', :controller => 'shipments', :action => 'additional'
   
   map.login '/login', :controller => 'admin', :action => 'index'
   map.logout '/logout', :controller => 'admin', :action => 'logout'
@@ -39,6 +45,6 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  map.connect ':controller/:action/:id'
+  #map.connect ':controller/:action/:id'
   #map.connect ':controller/:action/:id.:format'
 end

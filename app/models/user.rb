@@ -8,8 +8,24 @@ class User < ActiveRecord::Base
   validates_length_of :password, :within => 6..12, :on => :create, :message => " must be 6 to 12 characters long."
   
   attr_accessor :password, :confirm_password, :old_password
-  attr_accessible :first_name, :last_name, :login, :email
-  attr_protected :hashed_password, :salt
+  attr_accessible :first_name, :last_name, :login, :email, :access
+  
+  def accessible_shipments
+    case when self.access == 'Global'
+      return Shipment.find(:all, :order => ["ship_date ASC"])
+    when self.access == 'Winery'
+      user_wineries = self.wineries.collect {|c| c.id}
+      shipments = []
+      winery_shipments = Shipment.find(:all, :order => ['ship_date ASC']).each do |shipment|
+        if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
+          shipments << shipment
+        end
+      end
+      return shipments
+    when self.access == 'Carrier'
+      return Shipment.find(:all, :order => ["ship_date ASC"], :conditions => ["shipper_id = ?", self.shipper_id])
+    end
+  end
   
   def full_name
     self.first_name.humanize + ' ' + self.last_name.humanize

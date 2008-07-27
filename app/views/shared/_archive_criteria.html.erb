@@ -1,0 +1,8 @@
+<% if @item_list.empty? %>
+	<%= select :archive, :item, @item_list.collect {|i| [i.name, i.id]}, {:prompt => true}, 
+			{:disabled => true} %>
+<% else %>
+	<%= select :archive, :item, @item_list.collect {|i| [i.name, i.id]}, {:prompt => true},
+	 			:onchange => remote_function(:url => {:controller => 'shipments', :action => 'test_complete'}, 
+				:with => "'value=' + value")%>
+<% end %>

@@ -1,0 +1,1 @@
+page.replace_html :archive_submit, :partial => 'shared/archive_submit', :object => @value
