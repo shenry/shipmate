@@ -1,4 +1,5 @@
 <%= error_messages_for :winery %>
+<% button_name ||= "New Winery" %>
 <% form_remote_for @winery, :html => {:id => 'new_winery_form'},
 									:loading => "Element.show('spinner')",
 									:complete => "Element.hide('spinner')" do |f| %>
@@ -31,7 +32,7 @@
 		<tr>
 			<td align='right'>Zip Code</td>
 			<td><%= f.text_field :zip, :size => 8 %></td>
-			<td align='left'><%= f.submit 'New Winery' %></td>
+			<td align='left'><%= f.submit button_name %></td>
 		</tr>
 	</table>
 <% end %>

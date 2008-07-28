@@ -1,2 +1,5 @@
-<h1>Wineries#edit</h1>
-<p>Find me in app/views/wineries/edit.html.erb</p>
+<% @page_title = "Update Winery" %>
+<h1>Edit Winery</h1>
+<% form_for @winery do |f| %>
+<%= render :partial => 'shared/new_winery_form', :locals => {:f => f, :button_name => "Update"} %>
+<% end %>

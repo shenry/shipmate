@@ -25,6 +25,17 @@ class WineriesController < ApplicationController
   end
 
   def edit
+    @winery = Winery.find(params[:id])
+  end
+  
+  def update
+    @winery = Winery.find(params[:id])
+    if @winery.update_attributes(params[:winery])
+      flash[:notice] = "Winery '#{@winery.name}' successfully updated."
+      redirect_to wineries_path
+    else
+      render :action => 'edit'
+    end
   end
   
   def destroy

@@ -12,6 +12,7 @@ class ShippersController < ApplicationController
   def create
     @shipper = Shipper.new(params[:shipper])
     if @shipper.save
+      flash[:notice] = "New carrier '#{@shipper.name}' successfully created."
       redirect_to shippers_path
     else
       render :action => 'new'
@@ -25,6 +26,7 @@ class ShippersController < ApplicationController
   def update
     @shipper = Shipper.find(params[:id])
     if @shipper.update_attributes(params[:shipper])
+      flash[:notice] = "Carrier '#{@shipper.name}' successfully updated."
       redirect_to shippers_path
     else
       render :action => 'edit'
