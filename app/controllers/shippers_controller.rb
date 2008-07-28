@@ -6,8 +6,28 @@ class ShippersController < ApplicationController
   end
 
   def new
+    @shipper = Shipper.new
+  end
+  
+  def create
+    @shipper = Shipper.new(params[:shipper])
+    if @shipper.save
+      redirect_to shippers_path
+    else
+      render :action => 'new'
+    end
   end
 
   def edit
+    @shipper = Shipper.find(params[:id])
+  end
+  
+  def update
+    @shipper = Shipper.find(params[:id])
+    if @shipper.update_attributes(params[:shipper])
+      redirect_to shippers_path
+    else
+      render :action => 'edit'
+    end
   end
 end

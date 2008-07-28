@@ -1,17 +1,17 @@
 <% @page_title = "Winery Admin" %>
-<table>
-	<tr><td colspan=7><div id="create_new_link"><%= link_to "New Winery", new_winery_path %></div></td>
+<div id="create_new_link"><%= link_to "New Winery", new_winery_path %></div><br /><br />
+<table class='sortable'>
 	<tr>
 		<th>Name</th>
 		<th>Bond</th>
 		<th>City</th>
 		<th>State</th>
-		<th>Addresss</th>
+		<th class='sorttable_nosort'>Addresss</th>
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 	</tr>
 	<% @wineries.each do |winery| %>
-		<tr class="<%= cycle('row1', 'row2') %>">
+		<tr class='lined'>
 			<td valign='top'><%=h winery.name %></td>
 			<td valign='top'><%=h "BW-" + winery.state.upcase + "-" + winery.bond %></td>
 			<td valign='top'><%=h winery.city %></td>

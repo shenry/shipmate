@@ -1,0 +1,17 @@
+<% form_for @shipper do |f| %>
+	<table>
+		<tr>
+			<td>Full Name</td>
+			<td><%= f.text_field :name, :size => 22 %></td>
+		</tr>
+		<tr>
+			<td>Brief Name</td>
+			<td><%= f.text_field :brief_name, :size => 22 %></td>
+			<td class='small_text', align='left'>(8 char max)</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td align='right'><%= f.submit button_name %></td>
+		</tr>
+	</table>
+<% end %>

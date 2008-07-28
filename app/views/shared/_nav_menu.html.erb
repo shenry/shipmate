@@ -16,11 +16,11 @@
 			<% else %>
 			<td class="<%= current_page?(users_path) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Manage Users", users_path %></td>
-			<% end %>
 			<td class="<%= current_page?(wineries_path) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Manage Wineries", wineries_path %></td>
 			<td class="<%= current_page?(shippers_path) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Manage Carriers", shippers_path %></td>
+			<% end %>
 		</tr>
 	</table>
 </div>

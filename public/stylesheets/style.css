@@ -36,13 +36,15 @@ td.tab {background: #5c9fbe; color: #dfe0e2;}
 #user_winery_select {padding: 0 0 0 10px; float: left;}
 #main_user_table {float: left;}
 
-#create_new_link {float:right; border: 1px solid #2b2b2c; padding: 2px; background: #f6e67c;}
+#create_new_link {float:left; border: 1px solid #2b2b2c; padding: 2px; background: #f6e67c;}
 #create_new_link a {color: #2b2b2c; font-size: 0.95em;}
 .no_pad {padding: 0 0 0 0;}
 #archive {float:right; padding: 0 4px 0 0;}
 #archive_select {display: inline;}
 img.archive_spinner {padding: 2px 4px 0 0; float:right;}
 #header_spinner {float: right; margin: 7px 0 0 0 ;}
+.small_text {font-size: 0.8em; padding: 0 0 0 2px;}
 
 /* sortable table styles */
 table.sortable td {font-size: 0.92em;}
+.lined td {border-bottom: 1px solid;}

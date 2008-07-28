@@ -1,6 +1,6 @@
 <% @page_title = "User Admin Menu"%>
-<table>
-	<tr><td colspan=7><div id="create_new_link"><%= link_to "New User", new_user_path %></div></td>
+<div id="create_new_link"><%= link_to "New User", new_user_path %></div><br /><br />
+<table class='sortable'>
 	<tr>
 		<th>Login</th>
 		<th>Name</th>
@@ -11,7 +11,7 @@
 		<th>&nbsp;</th>
 	</tr>
 	<% @users.each do |user| %>
-		<tr valign='top', class="<%= cycle('row1', 'row2') %>">
+		<tr valign='top', class="lined">
 			<td><%=h user.login %></td>
 			<td><%=h user.full_name %></td>
 			<td><%= mail_to user.email %></td>

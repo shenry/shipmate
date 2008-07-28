@@ -1,13 +1,16 @@
 <% @page_title = "Listing Carriers" -%>
-<table>
+<div id="create_new_link"><%= link_to "New Carrier", new_shipper_path %></div><br /><br />
+<table class='sortable'>
 	<tr>
-		<th>Name</th>
+		<th>Full Name</th>
+		<th>Brief Name</th>
 		<th>&nbsp;</th>
 		<th>&nbsp;</th>
 	</tr>
 	<% @shippers.each do |shipper| -%>
-		<tr>
+		<tr class='lined'>
 			<td><%=h shipper.name %></td>
+			<td><%=h shipper.brief_name %></td>
 			<td><%= link_to "Edit", edit_shipper_path(shipper) %></td>
 			<td><%= link_to "Delete", shipper_path(shipper), 
 							:confirm => "Are you sure you want to permanently delete this shipper?",
