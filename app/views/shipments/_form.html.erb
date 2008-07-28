@@ -3,7 +3,7 @@
 	<%= render :partial => 'shared/new_winery_form' %>
 </div>
 <div id="shipment_form">
-	<% form_tag @shipment_url do %>
+	<% form_tag @shipment_url, @method do %>
 	<div id="wineries_form">
 		<%= render :partial => 'shared/shipment_wineries_form' %>
 	</div>

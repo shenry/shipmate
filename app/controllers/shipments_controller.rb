@@ -50,6 +50,7 @@ class ShipmentsController < ApplicationController
       @shipment = Shipment.find(params[:id])
       @shippers = Shipper.find(:all, :order => ["name ASC"])
       @shipment_url = {:controller => 'shipments', :action => 'create'}
+      @method = {:method => :post}
       render :action => 'new'
     elsif request.post?
       @shipment = Shipment.new(params[:shipment])
@@ -67,6 +68,7 @@ class ShipmentsController < ApplicationController
       @shippers = Shipper.find(:all, :order => ["name ASC"])
       @shipment = Shipment.new
       @shipment_url = {:controller => 'shipments', :action => 'create'}
+      @method = {:method => :post}
     #end
   end
   
@@ -96,7 +98,9 @@ class ShipmentsController < ApplicationController
 
   def edit
     @shipment = Shipment.find(params[:id])
-    @shipments_url = {:controller => 'shipments', :action => 'update'}
+    @shipment_url = {:controller => 'shipments', :action => 'update'}
+    @shippers = Shipper.find(:all, :order => ["name ASC"])
+    @method = {:method => :put}
   end
   
   def destroy

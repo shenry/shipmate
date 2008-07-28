@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   	<%= stylesheet_link_tag("style.css") %>
+	<script src="/javascripts/sorttable.js"></script>
 	<%= javascript_include_tag :defaults %>
 	<title><%= @page_title.nil? ? "Shipping" : "Shipping :: #{@page_title}" %></title>
 </head>
@@ -11,7 +12,9 @@
 		<div id="header">
 			<%= render :partial => 'shared/header' %>
 		</div>
-		<%= render :partial => 'shared/nav_menu' %>
+		<% unless @current_user.nil? %>
+			<%= render :partial => 'shared/nav_menu' %>
+		<% end %>
 		<div id="yield">
 			<div id="ajax_flash">
 				<% if flash[:notice] %>

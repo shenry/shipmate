@@ -1,4 +1,6 @@
-<% form_remote_tag :url => {:controller => 'shipments', :action => 'archive'} do %>
+<% form_remote_tag :url => {:controller => 'shipments', :action => 'archive'},
+ 					:loading => "Element.show('spinner')",
+					:complete => "Element.hide('spinner')" do %>
 	Filter by 
 		<span id="archive_select">
 			<%= select :archive, :category, ARCHIVE_CATEGORIES, {:prompt => true},
