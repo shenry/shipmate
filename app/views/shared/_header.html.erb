@@ -2,4 +2,4 @@
 	<%= session[:user_id] ? "Hello, #{@current_user.login} | #{link_to("Logout", logout_path)}" : link_to("Login") %><br />
 	<div id="header_spinner"><%= image_tag "blue_spinner.gif", :id => "spinner", :style => "display:none;" %></div>
 </div>
-<div id="logo">ShipMate</div>
+<div id="logo">ShipMate<span id="beta">&nbsp;beta</span></div>

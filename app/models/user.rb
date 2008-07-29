@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   validates_inclusion_of :access, :in => ['Global', 'Carrier', 'Winery']
   validates_uniqueness_of :login
   validates_length_of :password, :within => 6..12, :on => :create, :message => " must be 6 to 12 characters long."
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
+  validates_presence_of :first_name, :on => :create, :message => "can't be blank"
+  validates_presence_of :last_name, :on => :create, :message => "can't be blank"
   
   attr_accessor :password, :confirm_password, :old_password
   attr_accessible :first_name, :last_name, :login, :email, :access
@@ -35,6 +38,8 @@ class User < ActiveRecord::Base
     if self.access != 'Carrier'
       self.shipper_id = 0
     end
+    self.first_name.humanize
+    self.last_name.humanize
   end
   
   def before_create

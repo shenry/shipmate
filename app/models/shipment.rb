@@ -8,11 +8,7 @@ class Shipment < ActiveRecord::Base
   validates_presence_of :to_winery_id, :on => :create, :message => "must be selected"
   validates_presence_of :ship_date, :on => :create, :message => "can't be blank"
   validates_presence_of :wine, :on => :create, :message => "can't be blank"
-  #before_save :confirm_valid_wineries
-  #
-  #def confirm_valid_wineries
-  #  if self.from_winery_id == self.to_winery_id
-  #    return false
-  #  end
-  #end
+  validates_inclusion_of :gals_per_load, :in => 1..7000, :on => :create, :message => "is invalid"
+  
+  
 end

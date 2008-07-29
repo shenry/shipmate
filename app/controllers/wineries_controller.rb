@@ -1,5 +1,5 @@
 class WineriesController < ApplicationController
-  before_filter :logged_in, :get_user
+  before_filter :logged_in, :get_user, :allow_only_global_access
 
   def index
     @wineries = Winery.find(:all, :order => ["name ASC"])
@@ -12,7 +12,13 @@ class WineriesController < ApplicationController
   def create
     @winery = Winery.new(params[:winery])
     if @winery.save
-      @wineries = Winery.find(:all, :order => ["name ASC"])
+      @from_wineries = Winery.find(:all, :order => ["name ASC"])
+      if @current_user.access == 'Global'
+        @to_wineries = @from_wineries
+      else
+        @to_wineries = @current_user.wineries.sort {|a, b| a.name <=> b.name}
+      end
+      #@wineries = @from_wineries
       flash[:notice] = "New winery #{@winery.name} added."
       respond_to do |format|
         format.html {redirect_to wineries_path}

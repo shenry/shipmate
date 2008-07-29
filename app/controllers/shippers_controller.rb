@@ -1,5 +1,5 @@
 class ShippersController < ApplicationController
-  before_filter :logged_in, :get_user
+  before_filter :logged_in, :get_user, :allow_only_global_access
 
   def index
     @shippers = Shipper.find(:all, :order => ["name ASC"])

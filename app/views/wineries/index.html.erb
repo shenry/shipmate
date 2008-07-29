@@ -17,8 +17,8 @@
 			<td valign='top'><%=h winery.city %></td>
 			<td valign='top'><%=h winery.state %></td>
 			<td><%= winery.mailing_address %></td>
-			<td><%= link_to "Edit", edit_winery_path(winery) %></td>
-			<td><%= link_to "Delete", winery_path(winery), 
+			<td><%= link_to "edit", edit_winery_path(winery) %></td>
+			<td><%= link_to "x", winery_path(winery), 
 					:confirm => "Are you sure you want to permantently delete #{winery.name}?", :method => 'delete' %></td>
 		</tr>
 	<% end %>

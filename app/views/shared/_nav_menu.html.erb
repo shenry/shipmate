@@ -8,8 +8,10 @@
 		<tr>
 			<td class="<%= current_page?(home_shipments_path(@current_user)) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "Home", home_shipments_path(@current_user) %></td>
-			<td class="<%= current_page?(new_shipment_path) ? 'tab' : 'back' %>">
-						<%= link_to_unless_current "Ship Wine", new_shipment_path %></td>
+			<% unless @current_user.access == 'Carrier' %>
+				<td class="<%= current_page?(new_shipment_path) ? 'tab' : 'back' %>">
+							<%= link_to_unless_current "Ship Wine", new_shipment_path %></td>
+			<% end %>
 			<% unless @current_user.access == 'Global' %>
 			<td class="<%= current_page?(user_path(@current_user)) ? 'tab' : 'back' %>">
 						<%= link_to_unless_current "View Profile", user_path(@current_user) %></td>

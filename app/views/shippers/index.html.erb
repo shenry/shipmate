@@ -11,8 +11,8 @@
 		<tr class='lined'>
 			<td><%=h shipper.name %></td>
 			<td><%=h shipper.brief_name %></td>
-			<td><%= link_to "Edit", edit_shipper_path(shipper) %></td>
-			<td><%= link_to "Delete", shipper_path(shipper), 
+			<td><%= link_to "edit", edit_shipper_path(shipper) %></td>
+			<td><%= link_to "x", shipper_path(shipper), 
 							:confirm => "Are you sure you want to permanently delete this shipper?",
 							:method => 'delete' %></td>
 		</tr>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 14) do
+ActiveRecord::Schema.define(:version => 15) do
 
   create_table "shipments", :force => true do |t|
     t.string   "wine",                          :default => "",    :null => false
@@ -25,12 +25,16 @@ ActiveRecord::Schema.define(:version => 14) do
     t.boolean  "is_shipped",                    :default => false, :null => false
   end
 
+  add_index "shipments", ["ship_date"], :name => "index_shipments_on_ship_date"
+
   create_table "shippers", :force => true do |t|
     t.string   "name",                                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "brief_name", :limit => 8, :default => "", :null => false
   end
+
+  add_index "shippers", ["name"], :name => "index_shippers_on_name"
 
   create_table "shippers_users", :id => false, :force => true do |t|
     t.integer "shipper_id", :null => false
@@ -68,5 +72,7 @@ ActiveRecord::Schema.define(:version => 14) do
     t.datetime "updated_at"
     t.string   "bond",                         :default => "", :null => false
   end
+
+  add_index "wineries", ["name"], :name => "index_wineries_on_name"
 
 end

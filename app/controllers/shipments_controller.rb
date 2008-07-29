@@ -1,14 +1,21 @@
 class ShipmentsController < ApplicationController
   before_filter :logged_in, :get_user
   before_filter :get_wineries, :new_winery, :only => [:edit, :new, :create, :additional]
+  before_filter :reject_carrier_access, :only => [:index, :additional, :new, :create, :edit, :update, :delete]
 
   def index
     @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", STD_CUTOFF_DATE])
   end
   
   def home
-    @shipments = @current_user.accessible_shipments.find_all { |s| s.ship_date > STD_CUTOFF_DATE }
     @item_list = []
+    case when @current_user.access == 'Global'
+      @shipments = Shipment.find(:all, :include => [:to_winery, :from_winery], :order => ["ship_date ASC"], :conditions => ["ship_date > ?", STD_CUTOFF_DATE])
+    when @current_user.access == 'Winery'
+      @shipments = get_winery_accessible_shipments(@current_user, STD_CUTOFF_DATE)
+    when @current_user.access == 'Carrier'
+      @shipments = get_carrier_accessible_shipments(@current_user, STD_CUTOFF_DATE)
+    end
   end
   
   def archive
@@ -62,14 +69,10 @@ class ShipmentsController < ApplicationController
   end
 
   def new
-    #if params[:id]
-    #  @shipment = Shipment.find(params[:id])
-    #else
-      @shippers = Shipper.find(:all, :order => ["name ASC"])
       @shipment = Shipment.new
+      @shippers = Shipper.find(:all, :order => ["name ASC"])
       @shipment_url = {:controller => 'shipments', :action => 'create'}
       @method = {:method => :post}
-    #end
   end
   
   def create
@@ -113,7 +116,13 @@ class ShipmentsController < ApplicationController
   private # ----------------------------------------------------------
   
   def get_wineries
-    @wineries = Winery.find(:all, :order => ["name ASC"])
+    @from_wineries = Winery.find(:all, :order => ["name ASC"])
+    if @current_user.access == 'Global'
+      @to_wineries = @from_wineries
+    else
+      @to_wineries = @current_user.wineries.sort { |a, b| a.name <=> b.name }
+    end
+    
   end
   
   def new_winery

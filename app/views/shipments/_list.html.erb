@@ -25,10 +25,12 @@
 			 								:onclick => toggle_value(shipment) %>
 										<%= image_tag "ajax-loader.gif", :id => "spinner-#{shipment.id}",
 												:style => "display:none;" %></td>
-		
-			<td><%= link_to "Ship More", additional_shipment_path(shipment) %></td>
-			<td><%= link_to "Show", shipment_path(shipment) %></td>
-			<td><%= link_to "Edit", edit_shipment_path(shipment) %></td>			
+			<% if @current_user.wineries.collect {|w| w.id}.include?(shipment.to_winery.id) || @current_user.access == 'Global' %>
+				<td><%= link_to "ship more", additional_shipment_path(shipment) %></td>
+				<td><%= link_to "edit", edit_shipment_path(shipment) %></td>
+				<td><%= link_to "x", shipment_path(shipment), 
+						:confirm => "Are you sure you want to permanently delete this shipment?", :method => :delete %></td>
+			<% end %>			
 		</tr>
 	<% end -%>
 </table>

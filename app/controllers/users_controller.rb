@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :logged_in, :get_user
-  before_filter :reject_unauthorized_users, :except => [:home, :show]
+  before_filter :logged_in, :get_user, :allow_only_global_access
 
   def index
     @users = User.find(:all)
@@ -11,22 +10,6 @@ class UsersController < ApplicationController
   end
   
   def find_access
-    #if params[:value] == 'Carrier'
-    #  @value = 'Carrier'
-    #  @shippers = Shipper.find(:all, :order => ["name ASC"])
-    #  respond_to do |format|
-    #    format.js
-    #  end
-    #elsif params[:value] == 'Winery'
-    #  @value = 'Winery'
-    #  @user_wineries = User.find(session[:user_id]).wineries.collect {|w| w.id}
-    #  @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}
-    #  respond_to do |format|
-    #    format.js
-    #  end
-    #else
-    #  @value = 'nil'
-    #end
     if params[:value] == 'Carrier'
       @value = 'Carrier'
     elsif params[:value] == 'Winery'
@@ -107,16 +90,7 @@ class UsersController < ApplicationController
   end
   
   private # -------------------------------------------------------
-  
-  def reject_unauthorized_users
-    if @current_user.access != 'Global'
-      flash[:notice] = "You do not have access to this function, you've been logged out."
-      session[:user_id] = nil
-      redirect_to :controller => 'admin', :action => 'index'
-      return false
-    end
-  end
-  
+    
   def prepare_user_access_attributes
     @shippers = Shipper.find(:all, :order => ["name ASC"])
     @wineries = Winery.find(:all, :order => ["name ASC"]).collect {|w| [w.name, w.id]}

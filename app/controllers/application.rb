@@ -10,6 +10,41 @@ class ApplicationController < ActionController::Base
   
   private # -----------------------------------------------------------------
   
+  def reject_carrier_access
+    if @current_user.access == 'Carrier'
+      flash[:notice] = "You do not have access to this function, you've been logged out."
+      session[:user_id] = nil
+      redirect_to :controller => 'admin', :action => 'index'
+      return false
+    end
+  end
+  
+  def allow_only_global_access
+    if @current_user.access != 'Global'
+      flash[:notice] = "You do not have access to this function, you've been logged out."
+      session[:user_id] = nil
+      redirect_to :controller => 'admin', :action => 'index'
+      return false
+    end
+  end
+  
+  def get_winery_accessible_shipments(current_user, cutoff_date)
+    user_wineries = current_user.wineries.collect {|c| c.id}
+    @shipments = []
+    winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
+                  :conditions => ["ship_date > ?", cutoff_date]).each do |shipment|
+      if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
+        @shipments << shipment
+      end
+    end
+    return @shipments
+  end
+  
+  def get_carrier_accessible_shipments(current_user, cutoff_date)
+    @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
+                  :conditions => ["ship_date > ? AND shipper_id = ?", cutoff_date, current_user.shipper_id])
+  end
+  
   def logged_in
     if !session[:user_id]
       flash[:notice] = "You are not logged in."
@@ -20,7 +55,7 @@ class ApplicationController < ActionController::Base
   
   def get_user
     if session[:user_id]
-      @current_user = User.find_by_id(session[:user_id])
+      @current_user ||= User.find_by_id(session[:user_id])
     end
   end
   
