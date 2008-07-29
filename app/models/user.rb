@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates_presence_of :last_name, :on => :create, :message => "can't be blank"
   
   attr_accessor :password, :confirm_password, :old_password
-  attr_accessible :first_name, :last_name, :login, :email, :access
+  attr_accessible :first_name, :last_name, :login, :email, :access, :shipper_id
   
   def accessible_shipments
     case when self.access == 'Global'
@@ -35,9 +35,9 @@ class User < ActiveRecord::Base
   end
   
   def before_save
-    if self.access != 'Carrier'
-      self.shipper_id = 0
-    end
+    #unless self.access == 'Carrier'
+    #  self.shipper_id = 0
+    #end
     self.first_name.humanize
     self.last_name.humanize
   end
