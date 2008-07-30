@@ -2,10 +2,12 @@ class UsersController < ApplicationController
   before_filter :logged_in, :get_user, :allow_only_global_access
 
   def index
+    # Nothing new here
     @users = User.find(:all)
   end
   
   def show
+    # Nothing new here
     @user = User.find(session[:user_id])
   end
   
@@ -64,12 +66,10 @@ class UsersController < ApplicationController
     @password = params[:password]
     if @user.update_attributes(params[:user])
         if @user.access == 'Winery'
-        checked_wineries = params[:wineries]
-        @user.wineries = []
-        checked_wineries.each do |w|
-          @user.wineries << Winery.find(w)
+          checked_wineries = params[:wineries]
+          @user.wineries = []
+          checked_wineries.map { |w| @user.wineries << Winery.find(w) }
         end
-      end
       flash[:notice] = "User '#{@user.login}' successfully updated."
       redirect_to users_path
     else

@@ -46,14 +46,17 @@ class ApplicationController < ActionController::Base
   end
   
   def logged_in
+    #Checks to see if there is a :user_id param in the session hash, no value means the user is not logged in.
     if !session[:user_id]
       flash[:notice] = "You are not logged in."
-      redirect_to :controller => 'admin', :action => 'index'
+      redirect_to :controller => 'admin', :action => 'index' #fix this once a proper site is made.
       return false
     end
   end
   
   def get_user
+    #get the User object of the logged-in user. This is used throughout the application to determine access level
+    #to functions and links and the like.
     if session[:user_id]
       @current_user ||= User.find_by_id(session[:user_id])
     end
