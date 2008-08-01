@@ -12,17 +12,17 @@
 ActiveRecord::Schema.define(:version => 16) do
 
   create_table "shipments", :force => true do |t|
-    t.string   "wine",                          :default => "",    :null => false
-    t.integer  "shipper_id",                    :default => 0
-    t.date     "ship_date",                                        :null => false
+    t.string   "wine",           :default => "",    :null => false
+    t.integer  "shipper_id"
+    t.date     "ship_date",                         :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "loads",          :limit => 2,   :default => 1,     :null => false
-    t.integer  "gals_per_load",  :limit => 4,   :default => 6500,  :null => false
-    t.text     "comments",       :limit => 100, :default => "",    :null => false
+    t.integer  "loads",          :default => 1,     :null => false
+    t.integer  "gals_per_load",  :default => 6500,  :null => false
+    t.text     "comments",       :default => "",    :null => false
     t.integer  "from_winery_id"
     t.integer  "to_winery_id"
-    t.boolean  "is_shipped",                    :default => false, :null => false
+    t.boolean  "is_shipped",     :default => false, :null => false
   end
 
   add_index "shipments", ["ship_date"], :name => "index_shipments_on_ship_date"
@@ -35,11 +35,6 @@ ActiveRecord::Schema.define(:version => 16) do
   end
 
   add_index "shippers", ["name"], :name => "index_shippers_on_name"
-
-  create_table "shippers_users", :id => false, :force => true do |t|
-    t.integer "shipper_id", :null => false
-    t.integer "user_id",    :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "login",           :limit => 18, :default => "", :null => false
