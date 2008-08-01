@@ -29,10 +29,13 @@
 							<div class="<%= count.even? ? 'cal_ship_1' : 'cal_ship_2' %>", 
 								onclick="location.href='http://localhost:3000/shipments/<%= ship.id %>",
 								style="cursor:pointer;">
-								<span class="cal_ship_header">
+								<span class="cal_ship_small">
 									[<%=h ship.loads %> loads via <%=h ship.shipper.brief_name %>]<br />
 								</span>
-								<span class="cal_ship_details">
+								<span class="cal_ship_large">
+									&raquo;&nbsp;<%=h ship.wine %><br />
+								</span>
+								<span class="cal_ship_small">
 									<%=h ship.from_winery.name %> to <%=h ship.to_winery.name %>
 								</span>
 							</div>
