@@ -18,7 +18,7 @@ class AdminController < ApplicationController
         #a match! proceed
         session[:user_id] = found_user.id
         flash[:notice] = "Login successful."
-        redirect_to home_shipments_path(User.find(session[:user_id]))
+        redirect_to calendar_shipments_path(User.find(session[:user_id]))
       else
         #oops they made some mistake.
         flash[:notice] = "Username/password combination incorrect. Please check your caps lock and try again."

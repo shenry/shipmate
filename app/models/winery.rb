@@ -3,6 +3,7 @@ class Winery < ActiveRecord::Base
   has_many :from_shipments, :class_name => "Shipment", :foreign_key => "from_winery_id"
   has_and_belongs_to_many :users
   
+  validates_length_of :name, :within => 3..25, :on => :save, :message => "must be less than 25 characters."
   validates_numericality_of :bond, :on => :save, :message => " must be a number."
   validates_presence_of :name, :on => :save, :message => "can't be blank"
   validates_uniqueness_of :name, :on => :save, :message => " already exists."

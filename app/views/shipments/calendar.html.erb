@@ -1,0 +1,46 @@
+<div id="home_links">
+	<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
+	<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
+</div>
+
+<table id="calendar_table", border=1>
+	<% col_width = '125px' %>
+	<tr>
+		<th style="<%= "width: #{col_width};" %>">Sunday</th>
+		<th style="<%= "width: #{col_width};" %>">Monday</th>
+		<th style="<%= "width: #{col_width};" %>">Tuesday</th>
+		<th style="<%= "width: #{col_width};" %>">Wednesday</th>
+		<th style="<%= "width: #{col_width};" %>">Thursday</th>
+		<th style="<%= "width: #{col_width};" %>">Friday</th>
+		<th style="<%= "width: #{col_width};" %>">Saturday</th>
+	</tr>
+	<% @date_range.in_groups_of(7, false) do |dates_7| %>
+		<tr height=80px>
+			<% dates_7.each do |date| %>
+				<td class="cal_cell", valign='top'>
+					<div class="<%= date == Time.now.to_date ? 'cal_today' : 'cal_date' %>">
+						<%= remove_zeros_from_date(date.strftime("*%m/*%d")) %>
+					</div>
+					<div class="cal_scrolling">
+					<span class="cal_day_list">
+						<% count = 1 %>
+						<% @ship_hash[date].each do |ship| %>
+							<% count += 1 %>
+							<div class="<%= count.even? ? 'cal_ship_1' : 'cal_ship_2' %>", 
+								onclick="location.href='http://localhost:3000/shipments/<%= ship.id %>",
+								style="cursor:pointer;">
+								<span class="cal_ship_header">
+									[<%=h ship.loads %> loads via <%=h ship.shipper.brief_name %>]<br />
+								</span>
+								<span class="cal_ship_details">
+									<%=h ship.from_winery.name %> to <%=h ship.to_winery.name %>
+								</span>
+							</div>
+						<% end %>
+					</span>
+					</div>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>

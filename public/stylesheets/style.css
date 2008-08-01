@@ -14,11 +14,11 @@ table th, td {padding: 2px 2px 2px 10px;}
 #nav_menu td a:link, a:visited {text-decoration: none;}
 #nav_menu a:hover {color: #ffffff;}
 #nav_menu table {border-collapse: collapse;}
-td.tab {background: #5c9fbe; color: #dfe0e2;}
+td.tab {background: #5c9fbe; /*color: #dfe0e2;*/ color: #ffffff;}
 
 /* header banner styles */
-#login_banner {float:left; width: 20%; height: 65px; background: #5c9fbe;}
-#header {height: 65px; width: 80%; background: #5c9fbe; font-size: 0.85em; float: left;}
+#login_banner {float:left; width: 20%; height: 65px; font-size: 0.85em; background: #5c9fbe;}
+#header {height: 65px; width: 80%; background: #5c9fbe; float: left;}
 span#login_info {float: right; padding-top: 3px; color: #FFFFFF;  padding-right: 5px; *padding-left: 37%*;}
 #logo {color: #ffffff; font-size: 44px; padding: 5px 0 0 10px; float: left ;}
 #login_info a:link {color: #dfe0e2;}
@@ -49,3 +49,19 @@ img.archive_spinner {padding: 2px 4px 0 0; float:right;}
 /* sortable table styles */
 table.sortable td {font-size: 0.92em;}
 .lined td {border-bottom: 1px solid;}
+
+/* calendar styles */
+#home_links {margin-bottom: 10px;}
+table#calendar_table tr th {text-align: center;}
+table#calendar_table td {padding: none;}
+td.cal_cell {padding: 0 0 0 0; font-size: 0.8em;}
+.cal_date {background: #bec0c0; padding: 0 1px 1px 2px; border-right: 1px solid #2b2b2c; 
+			border-bottom: 1px solid #2b2b2c; font-size: 0.95em; width: 35px; text-align: center; font-weight: bold;}
+.cal_today {background: #FFFF33; padding: 0 1px 1px 2px; border-right: 1px solid #2b2b2c; 
+						border-bottom: 1px solid #2b2b2c; font-size: 0.95em; width: 35px; text-align: center; font-weight: bold;}
+.cal_clear {border: 1px solid green; margin-right: 90px;}
+.cal_scrolling {overflow: auto; height: 80px;}
+.cal_ship_1 a:hover {background: #CCCCCC;}
+.cal_ship_2 {background: #5c9fbe; color: #FFFFFF;}
+.cal_ship_header {padding: 1px 0 0 2px;}
+.cal_ship_details {padding: 0 0 1px 2px; font-size: 0.8em;}

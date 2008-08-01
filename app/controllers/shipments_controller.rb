@@ -8,6 +8,20 @@ class ShipmentsController < ApplicationController
     @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", STD_CUTOFF_DATE])
   end
   
+  def calendar
+    start_date = (Time.now.beginning_of_week - 1).to_date # Set start date to Sunday in current week
+    end_date = (start_date.next_month.next_week - 2).to_date # Set end date to Saturday in last week to display
+    @date_range = (start_date..end_date).to_a
+    @shipments = @current_user.accessible_shipments.select do |s|
+      s.ship_date >= start_date && s.ship_date <= end_date
+    end
+    ship_dates = @shipments.collect {|s| s.ship_date}.uniq! # Gets array of ship dates within date range
+    @ship_hash = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) } # Initialize default hash to hold values
+    ship_dates.each do |date|
+      @ship_hash[date] = @shipments.select { |event| event.ship_date == date }
+    end
+  end
+  
   def home
     #This is the default load page upon login. Users see the shipments relevant to them and have the appropriate access levels.
     @item_list = [] # This is a blank array for the purpose of the drop-down box feature that no longer is completely useful.

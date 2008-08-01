@@ -28,22 +28,41 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def get_winery_accessible_shipments(current_user, cutoff_date)
-    user_wineries = current_user.wineries.collect {|c| c.id}
-    @shipments = []
-    winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
-                  :conditions => ["ship_date > ?", cutoff_date]).each do |shipment|
-      if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
-        @shipments << shipment
-      end
+  def get_user_accessible_shipments(current_user_access, cutoff_date)
+    case when current_user_access == 'Winery'
+        user_wineries = current_user.wineries.collect {|c| c.id}
+        @shipments = []
+        winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
+                      :conditions => ["ship_date > ?", cutoff_date]).each do |shipment|
+          if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
+            @shipments << shipment
+          end
+        end
+        return @shipments
+    when current_user_access == 'Carrier'
+      @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
+                    :conditions => ["ship_date > ? AND shipper_id = ?", cutoff_date, current_user.shipper_id])
+    when current_user_access == 'Global'
+      @shipments = Shipment.find(:all, :order => ['ship_date ASC'])
     end
-    return @shipments
   end
   
-  def get_carrier_accessible_shipments(current_user, cutoff_date)
-    @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
-                  :conditions => ["ship_date > ? AND shipper_id = ?", cutoff_date, current_user.shipper_id])
-  end
+  #def get_winery_accessible_shipments(current_user, cutoff_date)
+  #  user_wineries = current_user.wineries.collect {|c| c.id}
+  #  @shipments = []
+  #  winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
+  #                :conditions => ["ship_date > ?", cutoff_date]).each do |shipment|
+  #    if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
+  #      @shipments << shipment
+  #    end
+  #  end
+  #  return @shipments
+  #end
+  
+  #def get_carrier_accessible_shipments(current_user, cutoff_date)
+  #  @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
+  #                :conditions => ["ship_date > ? AND shipper_id = ?", cutoff_date, current_user.shipper_id])
+  #end
   
   def logged_in
     #Checks to see if there is a :user_id param in the session hash, no value means the user is not logged in.

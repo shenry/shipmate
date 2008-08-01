@@ -6,8 +6,8 @@
   </span>
   <table>
     <tr>
-      <td class="<%= current_page?(home_shipments_path(@current_user)) ? 'tab' : 'back' %>">
-            <%= link_to_unless_current "Home", home_shipments_path(@current_user) %></td>
+      <td class="<%= (current_page?(calendar_shipments_path(@current_user))) || (current_page?(home_shipments_path(@current_user))) ? 'tab' : 'back' %>">
+            <%= link_to_unless_current "Home", calendar_shipments_path(@current_user) %></td>
       <% unless @current_user.access == 'Carrier' %>
         <td class="<%= current_page?(new_shipment_path) ? 'tab' : 'back' %>">
               <%= link_to_unless_current "Ship Wine", new_shipment_path %></td>

@@ -1,3 +1,7 @@
+<div id="home_links">
+	<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
+	<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
+</div>
 <div id="home_shipments">
 	<%= render :partial => 'shipments/list', :locals => {:shipments => @shipments} %>
 </div>

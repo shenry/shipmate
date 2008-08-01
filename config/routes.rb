@@ -1,9 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :wineries
-  map.resources :shipments, :member => {:additional => :any}, :collection => {:archive => :get}
+  map.resources :shipments, :member => {:additional => :any}, :collection => {:archive => :get, :calendar => :get}
   map.resources :shippers
   map.resources :users
   
+  map.calendar_shipments 'shipments/calendar/:id', :controller => 'shipments', :action => 'calendar'
   map.home_shipments 'shipments/home/:id', :controller => 'shipments', :action => 'home'
   map.archive_shipments 'shipments/archive/', :controller => 'shipments', :action => 'archive'
   map.connect 'shipments/item_list', :controller => 'shipments', :action => 'item_list'
@@ -41,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => 'shipments', :action => 'home'
+  map.root :controller => 'shipments', :action => 'calendar'
 
   # See how all your routes lay out with "rake routes"
 

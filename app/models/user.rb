@@ -18,11 +18,8 @@ class User < ActiveRecord::Base
       return Shipment.find(:all, :order => ["ship_date ASC"])
     when self.access == 'Winery'
       user_wineries = self.wineries.collect {|c| c.id}
-      shipments = []
-      winery_shipments = Shipment.find(:all, :order => ['ship_date ASC']).each do |shipment|
-        if user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
-          shipments << shipment
-        end
+      shipments = Shipment.find(:all, :order => ['ship_date ASC']).select do |shipment|
+        user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
       end
       return shipments
     when self.access == 'Carrier'
