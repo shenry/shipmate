@@ -51,17 +51,18 @@ table.sortable td {font-size: 0.92em;}
 .lined td {border-bottom: 1px solid;}
 
 /* calendar styles */
-#home_links {margin-bottom: 10px;}
+#home_links {margin-bottom: 5px;}
+table#calendar_table {border: 1px solid #2b2b2c;}
 table#calendar_table tr th {text-align: center;}
-table#calendar_table td {padding: none;}
+table#calendar_table td {padding: none; border: 1px solid #2b2b2c;}
 td.cal_cell {padding: 0 0 0 0; font-size: 0.8em;}
-.cal_date {background: #bec0c0; padding: 0 1px 1px 2px; border-right: 1px solid #2b2b2c; 
+.cal_date {background: #bec0c0; padding: 0 1px 0 2px; border-right: 1px solid #2b2b2c; 
 			border-bottom: 1px solid #2b2b2c; font-size: 0.95em; width: 35px; text-align: center; font-weight: bold;}
-.cal_today {background: #FFFF33; padding: 0 1px 1px 2px; border-right: 1px solid #2b2b2c; 
+.cal_today {background: #FFFF33; padding: 2px 1px 1px 2px; border-right: 1px solid #2b2b2c; 
 						border-bottom: 1px solid #2b2b2c; font-size: 0.95em; width: 35px; text-align: center; font-weight: bold;}
-.cal_clear {border: 1px solid green; margin-right: 90px;}
-.cal_scrolling {overflow: auto; height: 80px;}
+.cal_scrolling {overflow: auto; height: 80px; margin-top: 3px;}
 .cal_ship_1 a:hover {background: #CCCCCC;}
 .cal_ship_2 {background: #5c9fbe; color: #FFFFFF;}
-.cal_ship_large {padding: 0 0 0 10px;}
+.cal_ship_large {padding: 0 0 0 10px; font-weight: bold;}
 .cal_ship_small {padding: 1px 0 1px 2px; font-size: 0.8em;}
+#cal_detail {padding: 5px; font-size: 0.85em;}

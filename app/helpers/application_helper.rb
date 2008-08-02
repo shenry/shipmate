@@ -14,5 +14,17 @@ module ApplicationHelper
                     :complete => "Element.hide('spinner-#{object.id}')",
                     :with     => "this.name + '=' + this.checked")
   end
-
+  
+  def get_detail(shipment)
+    remote_function(:url      => shipment_path(shipment),
+                    :method   => :get,
+                    :loading  => "Element.show('spinner')",
+                    :complete => "Element.hide('spinner')")
+  end
+  
+  def hide_element
+    update_page do |page|
+      page.replace_html :cal_detail, ""
+    end
+  end
 end

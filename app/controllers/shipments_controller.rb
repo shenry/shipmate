@@ -15,7 +15,7 @@ class ShipmentsController < ApplicationController
     @shipments = @current_user.accessible_shipments.select do |s|
       s.ship_date >= start_date && s.ship_date <= end_date
     end
-    ship_dates = @shipments.collect {|s| s.ship_date}.uniq! # Gets array of ship dates within date range
+    ship_dates = @shipments.collect {|s| s.ship_date}.uniq # Gets array of ship dates within date range
     @ship_hash = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) } # Initialize default hash to hold values
     ship_dates.each do |date|
       @ship_hash[date] = @shipments.select { |event| event.ship_date == date }
@@ -95,6 +95,13 @@ class ShipmentsController < ApplicationController
         flash[:notice] = "Additional shipments successfully created."
         redirect_to home_shipments_path(@current_user)
       end
+    end
+  end
+  
+  def show
+    @shipment = Shipment.find(params[:id])
+    respond_to do |format|
+      format.js
     end
   end
 

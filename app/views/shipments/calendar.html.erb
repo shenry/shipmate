@@ -1,8 +1,14 @@
-<div id="home_links">
-	<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
-	<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
-</div>
-
+<table>
+	<tr height=58px>
+		<td width='20%', valign='middle'><span id="home_links">
+			<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
+			<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
+		</span></td>
+		<td width='80%', align='right'><div id="cal_detail">
+	
+		</div></td>
+	<tr>
+</table>
 <table id="calendar_table", border=1>
 	<% col_width = '125px' %>
 	<tr>
@@ -26,19 +32,13 @@
 						<% count = 1 %>
 						<% @ship_hash[date].each do |ship| %>
 							<% count += 1 %>
-							<div class="<%= count.even? ? 'cal_ship_1' : 'cal_ship_2' %>", 
-								onclick="location.href='http://localhost:3000/shipments/<%= ship.id %>",
-								style="cursor:pointer;">
-								<span class="cal_ship_small">
-									[<%=h ship.loads %> loads via <%=h ship.shipper.brief_name %>]<br />
-								</span>
-								<span class="cal_ship_large">
-									&raquo;&nbsp;<%=h ship.wine %><br />
-								</span>
-								<span class="cal_ship_small">
-									<%=h ship.from_winery.name %> to <%=h ship.to_winery.name %>
-								</span>
-							</div>
+							<% cal_class = (count.even? ? 'cal_ship_1' : 'cal_ship_2') %>
+							<% content_tag :a, :href => "#", 
+								:onclick => get_detail(ship) do %>
+								<% content_tag(:div, :class => cal_class) do %>
+									<%= render :partial => 'cal_item', :locals => {:ship => ship} %>
+								<% end %>
+							<% end %>
 						<% end %>
 					</span>
 					</div>

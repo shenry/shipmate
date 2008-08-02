@@ -1,0 +1,5 @@
+<%= content_tag :span, "[#{ship.loads} loads via #{ship.shipper.brief_name}]", 
+				:class => 'cal_ship_small' %><br />
+<%= content_tag :span, "#{ship.wine}", :class => 'cal_ship_large' %><br />
+<%= content_tag :span, "#{ship.from_winery.name} to #{ship.to_winery.name}", 
+				:class => 'cal_ship_small' %>
