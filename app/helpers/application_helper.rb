@@ -18,12 +18,21 @@ module ApplicationHelper
   def get_detail(shipment)
     remote_function(:url      => shipment_path(shipment),
                     :method   => :get,
-                    :loading  => "Element.show('spinner')",
+                    :before   => "Element.show('spinner')",
                     :complete => "Element.hide('spinner')")
+  end
+  
+  def get_day_summary(date)
+    remote_function(:url      => {:controller => 'shipments', :action => 'daily_group', :date => date},
+                    :method   => :get,
+                    :before   => "Element.show('spinner')",
+                    :complete => "Element.hide('spinner')")
+      
   end
   
   def hide_element
     update_page do |page|
+      page.replace_html :ajax_flash, ""
       page.replace_html :cal_detail, ""
     end
   end

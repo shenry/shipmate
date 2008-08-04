@@ -4,6 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :shippers
   map.resources :users
   
+  map.daily_group 'shipments/daily/:date', :controller => 'shipments', :action => 'daily_group'
+  
   map.calendar_shipments 'shipments/calendar/:id', :controller => 'shipments', :action => 'calendar'
   map.home_shipments 'shipments/home/:id', :controller => 'shipments', :action => 'home'
   map.archive_shipments 'shipments/archive/', :controller => 'shipments', :action => 'archive'

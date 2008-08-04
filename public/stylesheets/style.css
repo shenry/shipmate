@@ -1,5 +1,5 @@
 body {background: #2b2b2c; font-size: 0.95em; color: #26262c;}
-a:link, a:visited {color: #444444; text-decoration: none;}
+a:link, a:visited {color: #2b2b2c; text-decoration: none;}
 a:hover {color: #14161f;}
 #content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; margin-top: 20px; padding-bottom: 20px;
       background: #fff; border: 3px solid #bec0c0; min-height: 580px;}
@@ -51,7 +51,7 @@ table.sortable td {font-size: 0.92em;}
 .lined td {border-bottom: 1px solid;}
 
 /* calendar styles */
-#home_links {margin-bottom: 5px;}
+#home_links {margin-bottom: 5px; text-align: bottom;}
 table#calendar_table {border: 1px solid #2b2b2c;}
 table#calendar_table tr th {text-align: center;}
 table#calendar_table td {padding: none; border: 1px solid #2b2b2c;}
@@ -61,8 +61,9 @@ td.cal_cell {padding: 0 0 0 0; font-size: 0.8em;}
 .cal_today {background: #FFFF33; padding: 2px 1px 1px 2px; border-right: 1px solid #2b2b2c; 
 						border-bottom: 1px solid #2b2b2c; font-size: 0.95em; width: 35px; text-align: center; font-weight: bold;}
 .cal_scrolling {overflow: auto; height: 80px; margin-top: 3px;}
+.cal_ship_1 { margin-top: 1px; margin-bottom: 1px;}
 .cal_ship_1 a:hover {background: #CCCCCC;}
-.cal_ship_2 {background: #5c9fbe; color: #FFFFFF;}
+.cal_ship_2 {background: #5c9fbe; color: #FFFFFF; margin-top: 1px; margin-bottom: 1px;}
 .cal_ship_large {padding: 0 0 0 10px; font-weight: bold;}
-.cal_ship_small {padding: 1px 0 1px 2px; font-size: 0.8em;}
+.cal_ship_small {padding: 0 0 0 2px; margin-bottom: 5px; font-size: 0.8em;}
 #cal_detail {padding: 5px; font-size: 0.85em;}

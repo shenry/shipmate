@@ -9,10 +9,9 @@
 		<th>Total Gals</th>
 		<th width=71px>&nbsp;</th>
 		<th>&nbsp;</th>
-		<th>&nbsp;</th>
-		<th>&nbsp;</th>
+		<th colspan=2><%= controller.action_name == 'daily_group' ? (link_to_function "[hide]", hide_element) : '&nbsp;' %></th>
 	</tr>
-	<% @shipments.each do |shipment| -%>
+	<% @shipments.each do |shipment| %>
 		<tr>
 			<td><%=h remove_zeros_from_date(shipment.ship_date.strftime("*%m/*%d/%y")) %></td>
 			<td><%=h shipment.from_winery.name %></td>
@@ -32,5 +31,5 @@
 						:confirm => "Are you sure you want to permanently delete this shipment?", :method => :delete %></td>
 			<% end %>			
 		</tr>
-	<% end -%>
+	<% end %>
 </table>

@@ -9,7 +9,7 @@
 		<th>Total Gals</th>
 		<th width=71px>&nbsp;</th>
 		<th>&nbsp;</th>
-		<th align='right', colspan=2><%= link_to_function "[hide]", hide_element() %></th>
+		<th align='right', colspan=2><%= link_to_function "[hide]", hide_element %></th>
 	</tr>
 		<tr>
 			<td><%=h remove_zeros_from_date(@shipment.ship_date.strftime("*%m/*%d/%y")) %></td>

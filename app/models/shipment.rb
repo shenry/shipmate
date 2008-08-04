@@ -10,11 +10,15 @@ class Shipment < ActiveRecord::Base
   validates_presence_of :wine, :on => :create, :message => "can't be blank"
   validates_inclusion_of :gals_per_load, :in => 1..7000, :on => :create, :message => "is invalid"
   
-  before_create :confirm_valid_ship_date
+  before_create :confirm_valid_ship_date, :upcase_wine
    
   def confirm_valid_ship_date
     if self.ship_date < Time.now.to_date
       return false
     end
+  end
+  
+  def upcase_wine
+    self.wine.upcase!
   end
 end

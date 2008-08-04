@@ -1,4 +1,4 @@
-<table>
+<table class="alt_link">
 	<tr height=58px>
 		<td width='20%', valign='middle'><span id="home_links">
 			<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
@@ -24,16 +24,18 @@
 		<tr height=80px>
 			<% dates_7.each do |date| %>
 				<td class="cal_cell", valign='top'>
-					<div class="<%= date == Time.now.to_date ? 'cal_today' : 'cal_date' %>">
-						<%= remove_zeros_from_date(date.strftime("*%m/*%d")) %>
-					</div>
+					<% content_tag :a, :href => "#", :onclick => get_day_summary(date) do %>
+						<div class="<%= date == Time.now.to_date ? 'cal_today' : 'cal_date' %>">
+							<%= remove_zeros_from_date(date.strftime("*%m/*%d")) %>
+						</div>
+					<% end %>
 					<div class="cal_scrolling">
 					<span class="cal_day_list">
 						<% count = 1 %>
 						<% @ship_hash[date].each do |ship| %>
 							<% count += 1 %>
 							<% cal_class = (count.even? ? 'cal_ship_1' : 'cal_ship_2') %>
-							<% content_tag :a, :href => "#", 
+							<% content_tag :a, :href => "#", :alt => "Get details", 
 								:onclick => get_detail(ship) do %>
 								<% content_tag(:div, :class => cal_class) do %>
 									<%= render :partial => 'cal_item', :locals => {:ship => ship} %>

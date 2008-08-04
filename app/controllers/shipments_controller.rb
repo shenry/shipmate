@@ -104,6 +104,13 @@ class ShipmentsController < ApplicationController
       format.js
     end
   end
+  
+  def daily_group
+    @shipments = Shipment.find_all_by_ship_date(params[:date])
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def new # Pretty standard, in need of some refactoring.
       @shipment = Shipment.new
