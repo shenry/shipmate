@@ -1,1 +1,5 @@
-page.replace_html :cal_detail, :partial => 'shipment', :object => @shipments
+unless @shipments.blank?
+  page.replace_html :ajax_flash, ""
+  page.visual_effect :highlight, :cal_detail
+  page.replace_html :cal_detail, :partial => 'shipment', :object => @shipments
+end

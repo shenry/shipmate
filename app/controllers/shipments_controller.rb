@@ -93,7 +93,7 @@ class ShipmentsController < ApplicationController
       @shipment = Shipment.new(params[:shipment])
       if @shipment.save
         flash[:notice] = "Additional shipments successfully created."
-        redirect_to home_shipments_path(@current_user)
+        redirect_to calendar_shipments_path(@current_user)
       end
     end
   end
@@ -123,7 +123,7 @@ class ShipmentsController < ApplicationController
     @shipment = Shipment.new(params[:shipment])
     if @shipment.save
       flash[:notice] = "New shipment successfully created."
-      redirect_to home_shipments_path(@current_user)
+      redirect_to calendar_shipments_path(@current_user)
     else
       flash[:notice] = "There was some error with the shipment... check the ship date and try again."
       @method = {:method => :post}
@@ -138,7 +138,7 @@ class ShipmentsController < ApplicationController
     respond_to do |format|
       if @shipment.update_attributes(params[:shipment])
         flash[:notice] = "Shipment successfully updated."
-        format.html {redirect_to(home_shipments_path(@current_user))}
+        format.html {redirect_to(calendar_shipments_path(@current_user))}
         format.js
       else
         format.html { render :action => "edit" }

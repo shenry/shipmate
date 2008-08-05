@@ -1,12 +1,12 @@
 <table class="alt_link">
 	<tr height=58px>
-		<td width='20%', valign='middle'><span id="home_links">
+		<td width='25%', valign='bottom'><span id="home_links">
 			<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
 			<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
 		</span></td>
-		<td width='80%', align='right'><div id="cal_detail">
-	
-		</div></td>
+		<td width='75%', align='right'>
+			<div id="cal_detail"></div>
+		</td>
 	<tr>
 </table>
 <table id="calendar_table", border=1>
