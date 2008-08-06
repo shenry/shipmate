@@ -1,8 +1,10 @@
 body {background: #2b2b2c; font-size: 0.95em; color: #26262c;}
 a:link, a:visited {color: #2b2b2c; text-decoration: none;}
 a:hover {color: #14161f;}
-#content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; margin-top: 20px; padding-bottom: 20px;
-      background: #fff; border: 3px solid #bec0c0; min-height: 580px;}
+#content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; margin-top: 20px; /*padding-bottom: 20px;*/
+      background: #fff; border: 3px solid #bec0c0; /*min-height: 580px;*/}
+
+input {font-size: 1.0em;}
 
 table {border-collapse: collapse;}
 table th {text-align: left; border-bottom: 1px solid #262626;}
@@ -28,7 +30,7 @@ span#login_info {float: right; padding-top: 3px; color: #FFFFFF;  padding-right:
 #page_title {float: right; padding: 0 10px 0 0; font-size: 0.9em; color: #444444;}
 #flash {font-size: 0.95em; background: #ffff9f; border: 1px solid #2b2b2c; padding: 3px 5px 3px 10px; 
     margin: 0 20px 15px 0; color: #2b2b2c;}
-#yield {padding: 20px 0 0 20px; }
+#yield {padding: 20px 0 0 20px; min-height: 400px;}
 
 #new_shipment_page {padding: 0 25px 0 25px; width: 830px;}
 #shipment_form {float: left;}
@@ -45,6 +47,11 @@ span#login_info {float: right; padding-top: 3px; color: #FFFFFF;  padding-right:
 img.archive_spinner {padding: 2px 4px 0 0; float:right;}
 #header_spinner {float: right; margin: 7px 0 0 0 ;}
 .small_text {font-size: 0.8em; padding: 0 0 0 2px;}
+
+/* footer styles */
+#footer {background: #5c9fbe; height: 20px; padding: 10px 0 20px 0; margin-top: 20px; 
+		color: #FFFFFF; font-size: 1em; text-align: center;}
+#sub_text {font-size: 0.85em;}
 
 /* sortable table styles */
 table.sortable td {font-size: 0.92em;}
@@ -66,5 +73,5 @@ td.cal_cell {padding: 0 0 0 0; font-size: 0.8em;}
 .cal_ship_2 {background: #5c9fbe; color: #FFFFFF; margin-top: 1px; margin-bottom: 1px;}
 .cal_ship_large {padding: 0 0 0 10px; font-weight: bold;}
 .cal_ship_small {padding: 0 0 0 2px; margin-bottom: 5px; font-size: 0.8em;}
-#cal_detail {padding: 5px; font-size: 0.85em;}
+#cal_detail {padding: 5px; font-size: 0.80em;}
 table.alt_link {margin: 0 0 10px 0;}

@@ -16,11 +16,11 @@
       <td class="<%= current_page?(user_path(@current_user)) ? 'tab' : 'back' %>">
             <%= link_to_unless_current "View Profile", user_path(@current_user) %></td>
       <% else %>
-      <td class="<%= current_page?(users_path) ? 'tab' : 'back' %>">
+      <td class="<%= controller.controller_name == 'users' ? 'tab' : 'back' %>">
             <%= link_to_unless_current "Manage Users", users_path %></td>
-      <td class="<%= current_page?(wineries_path) ? 'tab' : 'back' %>">
+      <td class="<%= controller.controller_name == 'wineries' ? 'tab' : 'back' %>">
             <%= link_to_unless_current "Manage Wineries", wineries_path %></td>
-      <td class="<%= current_page?(shippers_path) ? 'tab' : 'back' %>">
+      <td class="<%= controller.controller_name == 'shippers' ? 'tab' : 'back' %>">
             <%= link_to_unless_current "Manage Carriers", shippers_path %></td>
       <% end %>
     </tr>
