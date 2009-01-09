@@ -28,8 +28,8 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def get_user_accessible_shipments(current_user_access, cutoff_date)
-    case when current_user_access == 'Winery'
+  def get_user_accessible_shipments(current_user, cutoff_date)
+    case when current_user.access == 'Winery'
         user_wineries = current_user.wineries.collect {|c| c.id}
         @shipments = []
         winery_shipments = Shipment.find(:all, :order => ['ship_Date ASC'], 
@@ -39,10 +39,10 @@ class ApplicationController < ActionController::Base
           end
         end
         return @shipments
-    when current_user_access == 'Carrier'
+    when current_user.access == 'Carrier'
       @shipments = Shipment.find(:all, :order => ['ship_date ASC'], 
                     :conditions => ["ship_date > ? AND shipper_id = ?", cutoff_date, current_user.shipper_id])
-    when current_user_access == 'Global'
+    when current_user.access == 'Global'
       @shipments = Shipment.find(:all, :order => ['ship_date ASC'])
     end
   end

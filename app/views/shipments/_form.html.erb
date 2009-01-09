@@ -1,7 +1,7 @@
 <%= calendar_date_select_includes "plain" %>
-<div id="new_ajax_winery_form", style="display:none;">
+<span id="new_ajax_winery_form", style="display:none;">
 	<%= render :partial => 'shared/new_winery_form' %>
-</div>
+</span>
 <div id="shipment_form">
 	<% form_tag @shipment_url, @method do %>
 	<div id="wineries_form">

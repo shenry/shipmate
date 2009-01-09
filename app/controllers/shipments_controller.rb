@@ -30,11 +30,11 @@ class ShipmentsController < ApplicationController
       @shipments = Shipment.find(:all, :include => [:to_winery, :from_winery], :order => ["ship_date ASC"], 
         :conditions => ["ship_date > ?", STD_CUTOFF_DATE]) # Creates object containing all viewable shipments
     when @current_user.access == 'Winery' # Checks if current user has winery priveliges
-      @shipments = get_winery_accessible_shipments(@current_user, STD_CUTOFF_DATE) # creates object containing shipments
+      @shipments = get_user_accessible_shipments(@current_user, STD_CUTOFF_DATE) # creates object containing shipments
                                                                                    # related to the wineries that this user
                                                                                    # can access.
     when @current_user.access == 'Carrier' # Checks if the current user has carrier priveliges
-      @shipments = get_carrier_accessible_shipments(@current_user, STD_CUTOFF_DATE) # creates object containing shiments
+      @shipments = get_user_accessible_shipments(@current_user, STD_CUTOFF_DATE) # creates object containing shiments
                                                                                     # related to the carriers shipping 
                                                                                     # the shipments (uh... sure)
     end

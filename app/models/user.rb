@@ -32,9 +32,6 @@ class User < ActiveRecord::Base
   end
   
   def before_save
-    #unless self.access == 'Carrier'
-    #  self.shipper_id = 0
-    #end
     self.first_name.humanize
     self.last_name.humanize
   end

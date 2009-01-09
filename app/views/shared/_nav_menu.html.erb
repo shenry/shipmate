@@ -1,9 +1,3 @@
-
-  <span id="archive">
-    <% if current_page?(home_shipments_path(@current_user)) || (controller.controller_name == 'shipments' && controller.action_name == 'archive') %>
-      <%= render :partial => 'shared/archive_nav' %>
-    <% end %>
-  </span>
   <table>
     <tr>
       <td class="<%= (current_page?(calendar_shipments_path(@current_user))) || (current_page?(home_shipments_path(@current_user))) ? 'tab' : 'back' %>">

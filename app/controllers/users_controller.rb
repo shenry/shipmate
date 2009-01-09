@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :logged_in, :get_user, :allow_only_global_access
+  before_filter :logged_in, :get_user
+  before_filter :allow_only_global_access, :except => :show
 
   def index
     # Nothing new here

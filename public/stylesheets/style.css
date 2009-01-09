@@ -1,6 +1,6 @@
 body {background: #2b2b2c; font-size: 0.95em; color: #26262c;}
-a:link, a:visited {color: #2b2b2c; text-decoration: none;}
-a:hover {color: #14161f;}
+a {color: #2b2b2c; text-decoration: none;}
+a:hover { text-decoration: underline; }
 #content {font-family: arial; width: 1000px; margin-left: auto; margin-right: auto; margin-top: 20px; /*padding-bottom: 20px;*/
       background: #fff; border: 3px solid #bec0c0; /*min-height: 580px;*/}
 
@@ -13,8 +13,8 @@ table th, td {padding: 2px 2px 2px 10px;}
 /* nav menu styles */
 #nav_menu {background: #bec0c0; font-size: 0.9em; clear: both;}
 #nav_menu td {padding: 3px 9px 3px 9px;}
-#nav_menu td a:link, a:visited {text-decoration: none;}
-#nav_menu a:hover {color: #ffffff;}
+div#nav_menu td a:link, a:visited {text-decoration: none;}
+div#nav_menu a:hover {color: #ffffff; text-decoration: none;}
 #nav_menu table {border-collapse: collapse;}
 td.tab {background: #5c9fbe; /*color: #dfe0e2;*/ color: #ffffff;}
 
@@ -22,25 +22,25 @@ td.tab {background: #5c9fbe; /*color: #dfe0e2;*/ color: #ffffff;}
 #login_banner {float:left; width: 20%; height: 65px; font-size: 0.85em; background: #5c9fbe;}
 #header {height: 65px; width: 80%; background: #5c9fbe; float: left;}
 span#login_info {float: right; padding-top: 3px; color: #FFFFFF;  padding-right: 5px; *padding-left: 37%*;}
-#logo {color: #ffffff; font-size: 44px; padding: 5px 0 0 10px; float: left ;}
+#logo {color: #ffffff; font-size: 44px; padding: 2px 0 0 10px; float: left ;}
 #login_info a:link {color: #dfe0e2;}
 #login_info a:visited {color: #dfe0e2;}
-#beta {font-size: 0.6em; color: #ffff33;}
+sup {font-size: 0.6em; color: #ffff33;}
 
 #page_title {float: right; padding: 0 10px 0 0; font-size: 0.9em; color: #444444;}
 #flash {font-size: 0.95em; background: #ffff9f; border: 1px solid #2b2b2c; padding: 3px 5px 3px 10px; 
     margin: 0 20px 15px 0; color: #2b2b2c;}
 #yield {padding: 20px 0 0 20px; min-height: 400px;}
 
-#new_shipment_page {padding: 0 25px 0 25px; width: 830px;}
-#shipment_form {float: left;}
-#new_ajax_winery_form {float: right;}
+#new_shipment_page {padding: 0 25px 0 0px; width: 940px; }
+#shipment_form {float: left; }
+#new_ajax_winery_form { float: right; }
 .table_align {width: 124px;}
 #user_winery_select {padding: 0 0 0 10px; float: left;}
 #main_user_table {float: left;}
 
-#create_new_link {float:left; border: 1px solid #2b2b2c; padding: 2px; background: #ffff9f;}
-#create_new_link a {color: #2b2b2c; font-size: 0.95em;}
+#create_new_link a {float:left; border: 1px solid #2b2b2c; padding: 2px 4px; background: #ffff9f; color: #2b2b2c; font-size: 0.95em;}
+#create_new_link a:hover { background: #FEFF39;}
 .no_pad {padding: 0 0 0 0;}
 #archive {float:right; padding: 0 4px 0 0;}
 #archive_select {display: inline;}
@@ -49,9 +49,8 @@ img.archive_spinner {padding: 2px 4px 0 0; float:right;}
 .small_text {font-size: 0.8em; padding: 0 0 0 2px;}
 
 /* footer styles */
-#footer {background: #5c9fbe; height: 20px; padding: 10px 0 20px 0; margin-top: 20px; 
-		color: #FFFFFF; font-size: 1em; text-align: center;}
-#sub_text {font-size: 0.85em;}
+#footer {background: #5c9fbe; height: 15px; padding: 5px 0 5px 0; margin-top: 20px; 
+		color: #FFFFFF; font-size: 1em; text-align: center; font-size: 0.85em;}
 
 /* sortable table styles */
 table.sortable td {font-size: 0.92em;}
