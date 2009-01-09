@@ -40,7 +40,7 @@ sup {font-size: 0.6em; color: #ffff33;}
 #main_user_table {float: left;}
 
 #create_new_link a {float:left; border: 1px solid #2b2b2c; padding: 2px 4px; background: #ffff9f; color: #2b2b2c; font-size: 0.95em;}
-#create_new_link a:hover { background: #FEFF39;}
+#create_new_link a:hover { background: #FEFF39; text-decoration: none; }
 .no_pad {padding: 0 0 0 0;}
 #archive {float:right; padding: 0 4px 0 0;}
 #archive_select {display: inline;}
