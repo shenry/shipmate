@@ -16,15 +16,8 @@
 			<td><%=h user.full_name %></td>
 			<td><%= mail_to user.email %></td>
 			<td><%=h user.access %></td>
-			<% if user.access == 'Global' %>
-				<td>Unlimited</td>
-			<% elsif user.access == 'Winery' %>
-				<td><%=h user.wineries.collect {|w| w.name}.join(', ') %></td>
-			<% elsif user.access == 'Carrier' %>
-				<td><%=h user.shipper.name %></td>
-			<% else %>
-				<td>Unknown access type</td>
-			<% end %>			<td><%= link_to 'edit', edit_user_path(user) %></td>
+			<td><%=h user_has_access_to(user) %></td>			
+			<td><%= link_to 'edit', edit_user_path(user) %></td>
 			<td><%= link_to 'x', user_path(user), :confirm => 'Are you sure you want to permanently delete this user?',
 			 											:method => 'delete' %></td>
 		</tr>

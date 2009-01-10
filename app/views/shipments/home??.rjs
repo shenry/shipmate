@@ -1,1 +1,0 @@
-page.replace_html :home_shipments, :partial => 'shipments/list', :object => @shipments

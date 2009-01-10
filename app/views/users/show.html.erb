@@ -11,14 +11,6 @@
 		<td><%=h @user.login %></td>
 		<td><%=h @user.email %></td>
 		<td><%=h @user.access %></td>
-		<% if @user.access == 'Global' %>
-			<td>Unlimited</td>
-		<% elsif @user.access == 'Winery' %>
-			<td><%=h @user.wineries.collect {|w| w.name}.join(', ') %></td>
-		<% elsif @user.access == 'Carrier' %>
-			<td><%=h @user.shipper.name %></td>
-		<% else %>
-			<td>Unknown access type</td>
-		<% end %>
+		<td><%=h user_has_access_to(@user) %></td>
 	</tr>
 </table>

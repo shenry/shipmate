@@ -36,4 +36,8 @@ module ApplicationHelper
       page.replace_html :cal_detail, ""
     end
   end
+  
+  def user_can_edit_shipment?(current_user, shipment)
+    current_user.wineries.collect {|w| w.id}.include?(shipment.to_winery.id) || current_user.access == 'Global'
+  end
 end

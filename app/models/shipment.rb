@@ -13,12 +13,14 @@ class Shipment < ActiveRecord::Base
   before_create :confirm_valid_ship_date, :upcase_wine
    
   def confirm_valid_ship_date
+    # Keep users from creating shipments in the past
     if self.ship_date < Time.now.to_date
       return false
     end
   end
   
   def upcase_wine
+    # Force blend numbers to upper-case only
     self.wine.upcase!
   end
 end

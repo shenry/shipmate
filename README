@@ -1,3 +1,19 @@
 == Welcome to ShipMate
 
 ShipMate is an online bulk-wine shipping management solution offering discrete access based on user role and associated wineries/carriers.
+
+Admin users define carriers (bulk wine shipping companies), wineries (source and destination points for wine shipment) and winery users (those who either ship or receive wine).
+
+== Carriers
+
+  Carriers may only view shipments that they have been scheduled to haul.
+
+== Winery Users
+  
+  Winery Users may view shipments that either originate at their winery(s) (defined by an admin) or that terminate at a their winery(s). Winery users may only create and edit shipments that terminate at their winery, since typically the receiving winery pays for shipment, so they should be responsible for the scheduling. Winery users may schedule shipments from any winery and can create wineries to ship from.
+
+== Global Users
+
+  Global users can create Wineries, Carriers (sometimes called 'shippers' in the code, sorry) and Winery Users. When Global users create Winery Users they define the wineries whose shipments that user may edit/view.
+
+Contact stuarthenry [at] gmail [dot] com for questions.... and apologies for the scant documentation.

@@ -13,17 +13,18 @@ class User < ActiveRecord::Base
   attr_accessor :password, :confirm_password, :old_password
   attr_accessible :first_name, :last_name, :login, :email, :access, :shipper_id
   
-  def accessible_shipments
+  def accessible_shipments(cutoff_date)
+    # Returns shipments that this user can view
     case when self.access == 'Global'
       return Shipment.find(:all, :order => ["ship_date ASC"])
     when self.access == 'Winery'
       user_wineries = self.wineries.collect {|c| c.id}
-      shipments = Shipment.find(:all, :order => ['ship_date ASC']).select do |shipment|
+      shipments = Shipment.find(:all, :order => ['ship_date ASC'], :conditions => ['ship_date > ?', cutoff_date]).select do |shipment|
         user_wineries.include?(shipment.to_winery_id) || user_wineries.include?(shipment.from_winery_id)
       end
       return shipments
     when self.access == 'Carrier'
-      return Shipment.find(:all, :order => ["ship_date ASC"], :conditions => ["shipper_id = ?", self.shipper_id])
+      return Shipment.find(:all, :order => ["ship_date ASC"], :conditions => ["shipper_id = ? and ship_date > ?", self.shipper_id, cutoff_date])
     end
   end
   

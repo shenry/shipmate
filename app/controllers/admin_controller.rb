@@ -2,14 +2,6 @@ class AdminController < ApplicationController
   before_filter :logged_in, :except => [:index, :login]
   before_filter :get_user
   
-  def index
-    #default page, now useless.... going to get rid of it
-  end
-  
-  def menu
-    #now useless
-  end
-  
   def login
     #Accepts login and password from user, proceeds only if post request
     if request.post?

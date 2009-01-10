@@ -11,9 +11,7 @@ class CreateUsers < ActiveRecord::Migration
 
       t.timestamps
     end
-    
-    User.create :login => 'root', :password => 'SpqrPadova', :first_name => 'root', :last_name => 'user', :access => 'Global'
-    
+    User.create :login => 'root', :password => 'password', :first_name => 'root', :last_name => 'user', :access => 'Global'
   end
 
   def self.down

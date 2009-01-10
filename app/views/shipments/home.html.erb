@@ -1,7 +1,20 @@
 <div id="home_links">
-	<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
-	<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
+	<%= render :partial => 'home_links', :locals => { :current_user => @current_user } %>
 </div>
 <div id="home_shipments">
-		<%= render :partial => 'shipments/shipment', :locals => {:shipments => @shipments} %>
+	<table class='sortable'>
+		<tr>
+			<th>Date</th>
+			<th>From</th>
+			<th>To</th>
+			<th>Carrier</th>
+			<th>Wine</th>
+			<th>Loads</th>
+			<th>Total Gals</th>
+			<th width=71px>&nbsp;</th>
+			<th>&nbsp;</th>
+			<th colspan=2><%= controller.action_name == 'daily_group' ? (link_to_function "[hide]", hide_element) : '&nbsp;' %></th>
+		</tr>
+		<%= render :partial => 'shipments/shipment', :collection => @shipments %>
+	</table>
 </div>

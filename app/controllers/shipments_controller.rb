@@ -2,17 +2,13 @@ class ShipmentsController < ApplicationController
   before_filter :logged_in, :get_user
   before_filter :get_wineries, :new_winery, :only => [:edit, :new, :create, :additional]
   before_filter :reject_carrier_access, :only => [:index, :additional, :new, :create, :edit, :update, :delete]
-
-  def index
-    #This method is no loger supported.... might as well delete it and see what breaks.
-    @shipments = Shipment.find(:all, :conditions => ["ship_date >= ?", STD_CUTOFF_DATE])
-  end
   
-  def calendar
+  def calendar # Bulids the sexy calendar view
     start_date = (Time.now.beginning_of_week - 1).to_date # Set start date to Sunday in current week
     end_date = (start_date.next_month.next_week - 2).to_date # Set end date to Saturday in last week to display
     @date_range = (start_date..end_date).to_a
-    @shipments = @current_user.accessible_shipments.select do |s|
+    # Now collect shipments that a user can view within the calendar date range...
+    @shipments = @current_user.accessible_shipments(STD_CUTOFF_DATE).select do |s|
       s.ship_date >= start_date && s.ship_date <= end_date
     end
     ship_dates = @shipments.collect {|s| s.ship_date}.uniq # Gets array of ship dates within date range
@@ -24,41 +20,13 @@ class ShipmentsController < ApplicationController
   
   def home
     #This is the default load page upon login. Users see the shipments relevant to them and have the appropriate access levels.
-    @item_list = [] # This is a blank array for the purpose of the drop-down box feature that no longer is completely useful.
-                    # May be deprecated soon..... 
-    case when @current_user.access == 'Global' # Check if current user has global priveliges
+    if @current_user.access == 'Global' # Check if current user has global priveliges
+      # Creates object containing all viewable shipments
       @shipments = Shipment.find(:all, :include => [:to_winery, :from_winery], :order => ["ship_date ASC"], 
-        :conditions => ["ship_date > ?", STD_CUTOFF_DATE]) # Creates object containing all viewable shipments
-    when @current_user.access == 'Winery' # Checks if current user has winery priveliges
-      @shipments = get_user_accessible_shipments(@current_user, STD_CUTOFF_DATE) # creates object containing shipments
-                                                                                   # related to the wineries that this user
-                                                                                   # can access.
-    when @current_user.access == 'Carrier' # Checks if the current user has carrier priveliges
-      @shipments = get_user_accessible_shipments(@current_user, STD_CUTOFF_DATE) # creates object containing shiments
-                                                                                    # related to the carriers shipping 
-                                                                                    # the shipments (uh... sure)
-    end
-  end
-  
-  def archive #might be deprecated....
-    # This should actually be called 'filter' or something else... my intention was to make an Archive feature but
-    # a filter feature seemed more handy. I ended up adding some freeware js code to make the shipment tables sortable.
-    # That should make finding the shipments easy enough. And it's all client-side so it's speedy. This feature might
-    # be rolled into a bona-fide archive feature if that seems like a worthwhile feature. I've never cared about the
-    # shipments I made a month or more ago, so maybe this is trash.
-    category = params[:archive][:category] # Get filter category
-    item = params[:archive][:item] # Get filter criteria (ie item)
-    selected_shipments = Shipment.find(:all, :order => ["ship_date ASC"], :conditions => ["#{category} = ?", item])
-      # Filter for all shipments satisfying the above criteria
-    @shipments = [] # Create empty array... probably a very bush-league way of doing this
-    @current_user.accessible_shipments.each do |shipment| # Loop through the user's accessible shipments
-      if selected_shipments.include?(shipment)  # If they intersect the filtered shipments,
-        @shipments << shipment  #  add them to the array @shipments that will be passed to the view template.
-      end
-    end
-    respond_to do |format|
-      format.html {render :action => 'home'}
-      format.js
+        :conditions => ["ship_date > ?", STD_CUTOFF_DATE])
+    else
+      # creates object containing shipments that this user can access.
+      @shipments = @current_user.accessible_shipments(STD_CUTOFF_DATE)
     end
   end
   

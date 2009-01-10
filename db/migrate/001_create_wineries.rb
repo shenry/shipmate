@@ -11,6 +11,9 @@ class CreateWineries < ActiveRecord::Migration
 
       t.timestamps
     end
+    %w( A B C ).each_with_index do |w, i|
+      a = Winery.create(:name => "Winery #{w}", :bond => 1000 + i, :address_line_1 => "#{w} St. ##{i}", :city => "#{w} City", :state => "CA", :zip => "94558" )
+    end
   end
 
   def self.down

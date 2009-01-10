@@ -1,8 +1,7 @@
 <table class="alt_link", width="950px">
 	<tr height=58px>
 		<td width='25%', valign='bottom'><span id="home_links">
-			<%= link_to_unless_current("Calendar View", calendar_shipments_path(@current_user)) %> | 
-			<%= link_to_unless_current("List View", home_shipments_path(@current_user)) %>
+			<%= render :partial => 'home_links', :locals => { :current_user => @current_user } %>
 		</span></td>
 		<td width='75%', align='right'>
 			<div id="cal_detail"></div>
@@ -31,10 +30,8 @@
 					<% end %>
 					<div class="cal_scrolling">
 					<span class="cal_day_list">
-						<% count = 1 %>
-						<% @ship_hash[date].each do |ship| %>
-							<% count += 1 %>
-							<% cal_class = (count.even? ? 'cal_ship_1' : 'cal_ship_2') %>
+						<% @ship_hash[date].each_with_index do |ship, i| %>
+							<% cal_class = (i.even? ? 'cal_ship_1' : 'cal_ship_2') %>
 							<% content_tag :a, :href => "#", :alt => "Get details", 
 								:onclick => get_detail(ship) do %>
 								<% content_tag(:div, :class => cal_class) do %>

@@ -6,4 +6,8 @@ module ShipmentsHelper
 		  end
     end
   end
+  
+  def total_gallons(shipment)
+    shipment.loads*shipment.gals_per_load
+  end
 end

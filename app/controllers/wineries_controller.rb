@@ -18,7 +18,6 @@ class WineriesController < ApplicationController
       else
         @to_wineries = @current_user.wineries.sort {|a, b| a.name <=> b.name}
       end
-      #@wineries = @from_wineries
       flash[:notice] = "New winery #{@winery.name} added."
       respond_to do |format|
         format.html {redirect_to wineries_path}

@@ -18,12 +18,12 @@
 			<td><%=h @shipment.shipper.brief_name %></td>
 			<td><%=h @shipment.wine %></td>
 			<td><%=h @shipment.loads %></td>
-			<td><%=h number_with_delimiter(@shipment.loads * @shipment.gals_per_load) %></td>
+			<td><%=h number_with_delimiter(total_gallons(@shipment)) %></td>
 			<td class='no_pad'>Done?<%= check_box_tag 'shipment[is_shipped]', "1", @shipment.is_shipped,
 			 								:onclick => toggle_value(@shipment) %>
 										<%= image_tag "ajax-loader.gif", :id => "spinner-#{@shipment.id}"	,
 													:style => "display:none;" %></td>
-			<% if @current_user.wineries.collect {|w| w.id}.include?(@shipment.to_winery.id) || @current_user.access == 'Global' %>
+			<% if user_can_edit_shipment?(@current_user, @shipment) %>
 				<td><%= link_to "ship more", additional_shipment_path(@shipment) %></td>
 				<td><%= link_to "edit", edit_shipment_path(@shipment) %></td>
 				<td><%= link_to "x", shipment_path(@shipment), 
